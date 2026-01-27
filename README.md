@@ -1,4 +1,4 @@
-# Hytale Plugin Template
+# Survival Overhaul - Mortal Wounds
 
-A template for Hytale java plugins. Created by Up, and slightly modified by Kaupenjoe. 
+A mod made by Rajoki, adds more survival features to Hytale. Adds bandages and splints, and injuries you can receive from getting damaged by enemies/players.
 
