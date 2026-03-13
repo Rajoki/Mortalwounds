@@ -1,0 +1,104 @@
+{
+  "TranslationProperties": {
+    "Name": "Crude Bandage",
+    "Description": "Heals bleeds."
+  },
+  "Quality": "Common",
+  "Icon": "Icons/ItemsGenerated/Bandage_Crude.png",
+  "PlayerAnimationsId": {
+    "Parent": "Item",
+    "Animations": {
+      "Consume": {
+        "FirstPerson": "Characters/Animations/Items/Main_Handed/Item/Attacks/Eat_Side/Eat_Side_FPS.blockyanim",
+        "ThirdPerson": "Characters/Animations/Items/Main_Handed/Item/Attacks/Eat_Side/Eat_Side.blockyanim",
+        "Speed": 1,
+        "Looping": true
+      }
+    }
+  },
+  "BlockType": {
+    "Material": "Empty",
+    "DrawType": "Model",
+    "CustomModel": "Items/Consumables/FirstAid/Bandage.blockymodel",
+    "ParticleColor": "#d5825d",
+    "CustomModelScale": 0.5,
+    "CubeShadingMode": "Standard",
+    "Opacity": "Solid",
+    "CustomModelTexture": [
+      {
+        "Texture": "Items/Consumables/FirstAid/Bandage_Texture.png"
+      }
+    ]
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "Quantity": 2,
+        "ItemId": "Ingredient_Fibre"
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Survival"
+        ],
+        "Id": "Workbench"
+      },
+      {
+        "Type": "Crafting",
+        "Id": "Fieldcraft",
+        "Categories": [
+          "Tools"
+        ]
+      }
+    ],
+    "TimeSeconds": 1,
+    "OutputQuantity": 1
+  },
+  "InteractionVars": {
+    "Effect": {
+      "Interactions": [
+        {
+          "Type": "ApplyEffect",
+          "EffectId": "Food_Instant_Heal_T1"
+        },
+        {
+          "Type": "EffectCondition",
+          "EntityEffectIds": [
+            "HeavyBleed"
+          ],
+          "Match": "None",
+          "Next": {
+            "Type": "ClearEntityEffect",
+            "EntityEffectId": "Bleed"
+          }
+        },
+        {
+          "Type": "EffectCondition",
+          "EntityEffectIds": [
+            "HeavyBleed"
+          ],
+          "Match": "All",
+          "Next": {
+            "Type": "ClearEntityEffect",
+            "EntityEffectId": "HeavyBleed"
+          }
+        }
+      ]
+    }
+  },
+  "MaxStack": 25,
+  "Scale": 2,
+  "DropOnDeath": true,
+  "Model": "Items/Consumables/FirstAid/Bandage.blockymodel",
+  "Texture": "Items/Consumables/FirstAid/Bandage_Texture.png",
+  "Parent": "Template_Food",
+  "Interactions": {
+    "Secondary": "Consume_Charge"
+  }
+}
