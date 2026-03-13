@@ -1,0 +1,33 @@
+{
+  "ApplicationEffects": {
+    "EntityBottomTint": "#100600",
+    "EntityTopTint": "#cf2302",
+    "ScreenEffect": "ScreenEffects/Fire.png",
+    "WorldSoundEventId": "SFX_Effect_Poison_World",
+    "LocalSoundEventId": "SFX_Effect_Poison_Local",
+    "Particles": [
+      {
+        "SystemId": "Effect_Poison",
+        "Color": "#9a0707"
+      }
+    ],
+    "ModelVFXId": "Poison"
+  },
+  "DamageCalculatorCooldown": 10,
+  "DamageCalculator": {
+    "BaseDamage": {
+      "HeavyBleed": 10
+    }
+  },
+  "DamageEffects": {
+    "WorldSoundEventId": "SFX_Effect_Poison_World",
+    "PlayerSoundEventId": "SFX_Effect_Poison_Local"
+  },
+  "OverlapBehavior": "Overwrite",
+  "Infinite": false,
+  "Debuff": true,
+  "StatusEffectIcon": "BlockTextures/Plant_Coral_Block_Red.png",
+  "Duration": 180,
+  "Locale": "HeavyBleed",
+  "Name": "HeavyBleed"
+}

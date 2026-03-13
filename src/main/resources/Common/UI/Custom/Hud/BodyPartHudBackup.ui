@@ -1,0 +1,84 @@
+//$C = "../Common.ui";
+//Group #BodyPartRoot {
+//  LayoutMode: Top;
+//  Anchor: (Width: 200, Height: 350, Right: 20, Top: 100);
+//  Padding: (Full: 5);
+//
+//  Label #TitleLabel {
+//    Text: "Body Parts";
+//    Style: (TextColor: #FFFFFF, RenderBold: true, FontSize: 14);
+//    Anchor: (Width: 190, Height: 25);
+//  }
+//
+//  Label #HeadLabel {
+//    Text: "Head: 10/10";
+//    Style: (TextColor: #00FF00);
+//    Anchor: (Width: 190, Height: 20);
+//  }
+//
+//  Label #HeadFracture {
+//    Text: "";
+//    Style: (TextColor: #FFA500, FontSize: 10);
+//    Anchor: (Width: 190, Height: 15);
+//  }
+//
+//  Label #TorsoLabel {
+//    Text: "Torso: 30/30";
+//    Style: (TextColor: #00FF00);
+//    Anchor: (Width: 190, Height: 20);
+//  }
+//
+//  Label #TorsoFracture {
+//    Text: "";
+//    Style: (TextColor: #FFA500, FontSize: 10);
+//    Anchor: (Width: 190, Height: 15);
+//  }
+//
+//  Label #LeftArmLabel {
+//    Text: "L Arm: 15/15";
+//    Style: (TextColor: #00FF00);
+//    Anchor: (Width: 190, Height: 20);
+//  }
+//
+//  Label #LeftArmFracture {
+//    Text: "";
+//    Style: (TextColor: #FFA500, FontSize: 10);
+//    Anchor: (Width: 190, Height: 15);
+//  }
+//
+//  Label #RightArmLabel {
+//    Text: "R Arm: 15/15";
+//    Style: (TextColor: #00FF00);
+//    Anchor: (Width: 190, Height: 20);
+//  }
+//
+//  Label #RightArmFracture {
+//    Text: "";
+//    Style: (TextColor: #FFA500, FontSize: 10);
+//    Anchor: (Width: 190, Height: 15);
+//  }
+//
+//  Label #LeftLegLabel {
+//    Text: "L Leg: 15/15";
+//    Style: (TextColor: #00FF00);
+//    Anchor: (Width: 190, Height: 20);
+//  }
+//
+//  Label #LeftLegFracture {
+//    Text: "";
+//    Style: (TextColor: #FFA500, FontSize: 10);
+//    Anchor: (Width: 190, Height: 15);
+//  }
+//
+//  Label #RightLegLabel {
+//    Text: "R Leg: 15/15";
+//    Style: (TextColor: #00FF00);
+//    Anchor: (Width: 190, Height: 20);
+//  }
+//
+//  Label #RightLegFracture {
+//    Text: "";
+//    Style: (TextColor: #FFA500, FontSize: 10);
+//    Anchor: (Width: 190, Height: 15);
+//  }
+//}

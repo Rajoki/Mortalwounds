@@ -1,0 +1,19 @@
+{
+  "Group": "Rajoki",
+  "Name": "Mortalwounds",
+  "Version": "1.0.0",
+  "Description": "An injury system plugin for hytale!",
+  "Authors": [
+    {
+      "Name": "Rajoki"
+    }
+  ],
+  "Website": "",
+  "ServerVersion": "2026.02.19-1a311a592",
+
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true,
+  "Main": "com.rajoki.injuryplugin.MortalWoundsPlugin"
+}

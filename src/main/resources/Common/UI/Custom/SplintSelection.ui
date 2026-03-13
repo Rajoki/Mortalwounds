@@ -1,0 +1,145 @@
+$Common = "Common.ui";
+@Background = PatchStyle(TexturePath: "MyBackground.png");
+
+Group {
+  LayoutMode: Center;
+
+  Group #BodyPartPanel {
+    Background: @Background;
+    Anchor: (Width: 500, Height: 500);
+
+    Label #TitleLabel {
+      Text: "Apply Splint";
+      Style: (HorizontalAlignment: Center, FontSize: 20, RenderBold: true, TextColor: #ffffff);
+      Anchor: (Width: 500, Height: 30, Top: 20);
+    }
+
+    Label #SubtitleLabel {
+      Text: "Select fractured body part to treat";
+      Style: (HorizontalAlignment: Center, FontSize: 12, TextColor: #aaaaaa);
+      Anchor: (Width: 500, Height: 20, Top: 50);
+    }
+
+    // === VISUAL BODY MODEL ===
+
+    // HEAD
+    Group #HeadModel {
+      Anchor: (Width: 60, Height: 60, Top: 90, Left: 220);
+      Background: #00FF00(1.0);
+      LayoutMode: Center;
+      Padding: (Full: 0);
+    }
+
+    // TORSO
+    Group #TorsoModel {
+      Anchor: (Width: 80, Height: 100, Top: 170, Left: 210);
+      Background: #00FF00(1.0);
+      LayoutMode: Center;
+      Padding: (Full: 0);
+    }
+
+    // RIGHT ARM
+    Group #RightArmModel {
+      Anchor: (Width: 30, Height: 90, Top: 180, Left: 170);
+      Background: #00FF00(1.0);
+      LayoutMode: Center;
+      Padding: (Full: 0);
+    }
+
+    // LEFT ARM
+    Group #LeftArmModel {
+      Anchor: (Width: 30, Height: 90, Top: 180, Left: 300);
+      Background: #00FF00(1.0);
+      LayoutMode: Center;
+      Padding: (Full: 0);
+    }
+
+    // RIGHT LEG
+    Group #RightLegModel {
+      Anchor: (Width: 35, Height: 110, Top: 280, Left: 214);
+      Background: #00FF00(1.0);
+      LayoutMode: Center;
+      Padding: (Full: 0);
+    }
+
+    // LEFT LEG
+    Group #LeftLegModel {
+      Anchor: (Width: 35, Height: 110, Top: 280, Left: 251);
+      Background: #00FF00(1.0);
+      LayoutMode: Center;
+      Padding: (Full: 0);
+    }
+
+    // === STATUS LABELS ===
+
+    Label #HEADStatus {
+      Anchor: (Width: 100, Height: 20, Top: 102, Left: 125);
+      Text: "OK";
+      Style: (FontSize: 11, TextColor: #00FF00, HorizontalAlignment: Center, RenderBold: true);
+    }
+
+    Label #TORSOStatus {
+      Anchor: (Width: 100, Height: 20, Top: 110, Left: 290);
+      Text: "OK";
+      Style: (FontSize: 11, TextColor: #00FF00, HorizontalAlignment: Center, RenderBold: true);
+    }
+
+    Label #RIGHTARMStatus {
+      Anchor: (Width: 80, Height: 20, Top: 212, Left: 80);
+      Text: "OK";
+      Style: (FontSize: 10, TextColor: #00FF00, HorizontalAlignment: Center, RenderBold: true);
+    }
+
+    Label #LEFTARMStatus {
+      Anchor: (Width: 80, Height: 20, Top: 212, Left: 340);
+      Text: "OK";
+      Style: (FontSize: 10, TextColor: #00FF00, HorizontalAlignment: Center, RenderBold: true);
+    }
+
+    Label #RIGHTLEGStatus {
+      Anchor: (Width: 80, Height: 20, Top: 315, Left: 125);
+      Text: "OK";
+      Style: (FontSize: 10, TextColor: #00FF00, HorizontalAlignment: Center, RenderBold: true);
+    }
+
+    Label #LEFTLEGStatus {
+      Anchor: (Width: 80, Height: 20, Top: 315, Left: 290);
+      Text: "OK";
+      Style: (FontSize: 10, TextColor: #00FF00, HorizontalAlignment: Center, RenderBold: true);
+    }
+
+    // === SPLINT BUTTONS with styled backgrounds ===
+
+    $Common.@SecondaryTextButton #HEADButton {
+      Text: "Splint";
+      Anchor: (Width: 80, Height: 28, Top: 125, Left: 130);
+    }
+
+    $Common.@SecondaryTextButton #TORSOButton {
+      Text: "Splint";
+      Anchor: (Width: 80, Height: 28, Top: 135, Left: 290);
+    }
+
+    $Common.@SecondaryTextButton #RIGHTARMButton {
+      Text: "Splint";
+      Anchor: (Width: 75, Height: 28, Top: 235, Left: 83);
+    }
+
+    $Common.@SecondaryTextButton #LEFTARMButton {
+      Text: "Splint";
+      Anchor: (Width: 75, Height: 28, Top: 235, Left: 343);
+    }
+
+    $Common.@SecondaryTextButton #RIGHTLEGButton {
+      Text: "Splint";
+      Anchor: (Width: 75, Height: 28, Top: 340, Left: 128);
+    }
+
+    $Common.@SecondaryTextButton #LEFTLEGButton {
+      Text: "Splint";
+      Anchor: (Width: 75, Height: 28, Top: 340, Left: 293);
+    }
+  }
+}
+
+$Common.@BackButton {}

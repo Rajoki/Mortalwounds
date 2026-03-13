@@ -1,0 +1,10 @@
+{
+  "ApplicationEffects": {
+    "EntityBottomTint": "#000000",
+    "EntityTopTint": "#000000",
+    "ScreenEffect": "ScreenEffects/Concussion.png"
+  },
+  "Duration": 1,
+  "RemovalBehavior": "Duration",
+  "OverlapBehavior": "Extend"
+}

@@ -4,12 +4,11 @@ plugins {
 }
 
 group = "com.rajoki.injuryplugin"
-version = "0.0.3"
+version = "1.4.0"
 val javaVersion = 25
 
 val appData = System.getenv("APPDATA") ?: (System.getenv("HOME") + "/.var/app/com.hypixel.HytaleLauncher/data")
 val hytaleAssets = file("$appData/Hytale/install/release/package/game/latest/Assets.zip")
-
 
 repositories {
     mavenCentral()
@@ -63,8 +62,6 @@ tasks.named<ProcessResources>("processResources") {
 hytale {
 
 }
-
-
 
 tasks.withType<Jar> {
     manifest {

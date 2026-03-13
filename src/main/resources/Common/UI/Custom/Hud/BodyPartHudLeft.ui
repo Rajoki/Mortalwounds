@@ -1,0 +1,224 @@
+$C = "../Common.ui";
+
+@Background = PatchStyle(TexturePath: "MyBackground.png");
+
+Group #BodyPartRoot {
+    Anchor: (Top: 43.795242, Right: 1720, Width: 200, Height: 378);
+    Visible: true;
+
+    Label #TitleLabel {
+        Text: "Body Parts";
+        Style: (TextColor: #FFFFFF, RenderBold: true, FontSize: 14);
+        Anchor: (Left: 62, Top: 5, Width: 80, Height: 20);
+    }
+    // ===== HEAD =====
+    Group #HeadSection {
+        Anchor: (Left: 0, Top: 30, Width: 200, Height: 50);
+
+        Group #HeadModel {
+            Anchor: (Left: 82, Top: 16, Width: 35, Height: 35);
+            Background: #00FF00(1.0);
+        }
+
+        Label #HeadStatus {
+            Anchor: (Left: 0, Top: 0, Width: 200, Height: 12);
+            Text: "";
+            Style: (TextColor: #FF0000, FontSize: 8, HorizontalAlignment: Center, RenderBold: true);
+        }
+
+        Group #HeadBleedIcon {
+            Anchor: (Left: 67, Top: 18, Width: 16, Height: 16);
+            Background: "../Blood.png";
+            Visible: true;
+        }
+
+        Group #HeadFractureIcon {
+            Anchor: (Left: 67, Top: 33, Width: 16, Height: 16);
+            Background: "../FractureBone.png";
+            Visible: true;
+        }
+
+        Group #HeadHeavyBleedIcon {
+            Anchor: (Left: 67, Top: 18, Width: 16, Height: 16);
+            Background: "../HeavyBlood.png";
+            Visible: true;
+            TooltipText: "Severe head bleeding — urgent treatment required!";
+            HitTestVisible: true;
+        }
+    }
+    // ===== TORSO =====
+    Group #TorsoSection {
+        Anchor: (Left: 0, Top: 80, Width: 200, Height: 70);
+
+        Group #TorsoModel {
+            Anchor: (Left: 74, Top: 7, Width: 50, Height: 64.99999);
+            Background: #00FF00(1.0);
+        }
+
+        Label #TorsoStatus {
+            Anchor: (Left: 0, Top: 0, Width: 200, Height: 12);
+            Text: "";
+            Style: (TextColor: #FF0000, FontSize: 8, HorizontalAlignment: Center, RenderBold: true);
+        }
+
+        Group #TorsoBleedIcon {
+            Anchor: (Left: 119, Top: -5, Width: 16, Height: 16);
+            Background: "../Blood.png";
+            Visible: true;
+        }
+
+        Group #TorsoFractureIcon {
+            Anchor: (Left: 113, Top: 11, Width: 16, Height: 16);
+            Background: "../FractureBone.png";
+            Visible: true;
+        }
+
+        Group #TorsoHeavyBleedIcon {
+            Anchor: (Left: 119, Top: -5, Width: 16, Height: 16);
+            Background: "../HeavyBlood.png";
+            Visible: true;
+            TooltipText: "Severe torso bleeding — urgent treatment required!";
+            HitTestVisible: true;
+        }
+    }
+    // ===== ARMS =====
+    Group #ArmsSection {
+        Anchor: (Left: 0, Top: 80, Width: 200, Height: 70);
+
+        Group #RightArmModel {
+            Anchor: (Left: 49, Top: 11, Width: 18, Height: 60);
+            Background: #00FF00(1.0);
+        }
+
+        Group #LeftArmModel {
+            Anchor: (Left: 130, Top: 11, Width: 18, Height: 60);
+            Background: #00FF00(1.0);
+        }
+
+        Label #RightArmStatus {
+            Anchor: (Left: 0, Top: 20, Width: 80, Height: 12);
+            Text: "";
+            Style: (TextColor: #FF0000, FontSize: 7, HorizontalAlignment: Center, RenderBold: true);
+        }
+
+        Label #LeftArmStatus {
+            Anchor: (Left: 120, Top: 20, Width: 80, Height: 12);
+            Text: "";
+            Style: (TextColor: #FF0000, FontSize: 7, HorizontalAlignment: Center, RenderBold: true);
+        }
+
+        Group #RightArmBleedIcon {
+            Anchor: (Left: 32, Top: 17, Width: 16, Height: 16);
+            Background: "../Blood.png";
+            Visible: true;
+        }
+
+        Group #LeftArmBleedIcon {
+            Anchor: (Left: 150, Top: 17, Width: 16, Height: 16);
+            Background: "../Blood.png";
+            Visible: true;
+        }
+
+        Group #RightArmHeavyBleedIcon {
+            Anchor: (Left: 32, Top: 17, Width: 16, Height: 16);
+            Background: "../HeavyBlood.png";
+            Visible: true;
+            TooltipText: "Severe arm bleeding!";
+            HitTestVisible: true;
+        }
+
+        Group #LeftArmHeavyBleedIcon {
+            Anchor: (Left: 149, Top: 17, Width: 16, Height: 16);
+            Background: "../HeavyBlood.png";
+            Visible: true;
+            TooltipText: "Severe arm bleeding!";
+            HitTestVisible: true;
+        }
+
+        Group #RightArmFractureIcon {
+            Anchor: (Left: 32.249886, Top: 34.499992, Width: 16, Height: 16);
+            Background: "../FractureBone.png";
+            Visible: true;
+            TooltipText: "Arm fracture // Damage dealt reduced by 25% // Heal with a splint!";
+            HitTestVisible: true;
+        }
+
+        Group #LeftArmFractureIcon {
+            Anchor: (Left: 149.04279, Top: 34.49, Width: 16, Height: 16);
+            Background: "../FractureBone.png";
+            Visible: true;
+            TooltipText: "Arm fracture // Damage dealt reduced // Heal with a splint!";
+            HitTestVisible: true;
+        }
+    }
+    // ===== LEGS =====
+    Group #LegsSection {
+        Anchor: (Left: 0, Top: 147, Width: 200, Height: 120);
+
+        Group #RightLegModel {
+            Anchor: (Left: 75, Top: 10, Width: 22, Height: 75);
+            Background: #00FF00(1.0);
+        }
+
+        Group #LeftLegModel {
+            Anchor: (Left: 103.25006, Top: 9.57748, Width: 22, Height: 75);
+            Background: #00FF00(1.0);
+        }
+
+        Label #RightLegStatus {
+            Anchor: (Left: -1.6666664, Top: 104.16664, Width: 80, Height: 12);
+            Text: "";
+            Style: (TextColor: #FF0000, FontSize: 7, HorizontalAlignment: Center, RenderBold: true);
+        }
+
+        Label #LeftLegStatus {
+            Anchor: (Left: 122.5, Top: 89.999985, Width: 80, Height: 12);
+            Text: "";
+            Style: (TextColor: #FF0000, FontSize: 7, HorizontalAlignment: Center, RenderBold: true);
+        }
+
+        Group #RightLegBleedIcon {
+            Anchor: (Left: 58, Top: 34.00001, Width: 16, Height: 16);
+            Background: "../Blood.png";
+            Visible: true;
+        }
+
+        Group #RightLegHeavyBleedIcon {
+            Anchor: (Left: 57.619095, Top: 34, Width: 16, Height: 16);
+            Background: "../HeavyBlood.png";
+            Visible: true;
+            TooltipText: "Severe leg bleeding!";
+            HitTestVisible: true;
+        }
+
+        Group #LeftLegBleedIcon {
+            Anchor: (Left: 127, Top: 34, Width: 16, Height: 16);
+            Background: "../Blood.png";
+            Visible: true;
+        }
+
+        Group #LeftLegHeavyBleedIcon {
+            Anchor: (Left: 126, Top: 34, Width: 16, Height: 16);
+            Background: "../HeavyBlood.png";
+            Visible: true;
+            TooltipText: "Severe leg bleeding!";
+            HitTestVisible: true;
+        }
+
+        Group #RightLegFractureIcon {
+            Anchor: (Left: 58.285824, Top: 51.71411, Width: 16, Height: 16);
+            Background: "../FractureBone.png";
+            Visible: true;
+            TooltipText: "Leg fracture // Movement speed reduced // Heal with a splint!";
+            HitTestVisible: true;
+        }
+
+        Group #LeftLegFractureIcon {
+            Anchor: (Left: 125.9176, Top: 51.71, Width: 16, Height: 16);
+            Background: "../FractureBone.png";
+            Visible: true;
+            TooltipText: "Leg fracture // Movement speed reduced // Heal with a splint!";
+            HitTestVisible: true;
+        }
+    }
+}

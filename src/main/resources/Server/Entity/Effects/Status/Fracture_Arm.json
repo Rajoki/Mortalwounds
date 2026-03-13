@@ -1,0 +1,14 @@
+{
+  "Duration": 360,
+  "ApplicationEffects": {
+    "EntityBottomTint": "#80ecff",
+    "ModelVFXId": "Intangible_Dark",
+    "ScreenEffect": "ScreenEffects/Sand.png",
+    "EntityTopTint": "#da72ff",
+    "LocalSoundEventId": "SFX_Bone_Break",
+    "WorldSoundEventId": "SFX_Bone_Break"
+  },
+  "OverlapBehavior": "Overwrite",
+  "StatusEffectIcon": "Icons/ItemsGenerated/Weapon_Club_Zombie_Frost_Arm.png",
+  "Debuff": true
+}

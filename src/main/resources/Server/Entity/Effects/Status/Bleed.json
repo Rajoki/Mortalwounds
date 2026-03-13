@@ -1,0 +1,33 @@
+{
+  "ApplicationEffects": {
+    "EntityBottomTint": "#EB3515",
+    "EntityTopTint": "#DB4E39",
+    "EntityAnimationId": "Hurt",
+    "WorldSoundEventId": "SFX_Effect_Poison_World",
+    "LocalSoundEventId": "SFX_Effect_Poison_Local",
+    "Particles": [
+      {
+        "SystemId": "Effect_Poison",
+        "Color": "#ef5e5e"
+      }
+    ]
+  },
+  "DamageCalculatorCooldown": 10,
+  "DamageCalculator": {
+    "BaseDamage": {
+      "Bleed": 5
+    }
+  },
+  "DamageEffects": {
+    "WorldSoundEventId": "SFX_Effect_Poison_World",
+    "PlayerSoundEventId": "SFX_Effect_Poison_Local"
+  },
+  "OverlapBehavior": "Overwrite",
+  "RemovalBehavior": "Duration",
+  "Infinite": false,
+  "Debuff": true,
+  "StatusEffectIcon": "Resources/Plants/Petal_Textures/Blood.png",
+  "Duration": 120,
+  "Locale": "Bleed",
+  "Name": "Bleed"
+}

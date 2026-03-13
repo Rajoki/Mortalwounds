@@ -1,1 +1,9 @@
 items.Example_Block.name=Example Block
+items.Bandage_Crude_Bleed.name = Crude Bandage
+items.Bandage_Crude_Bleed.description = Stops a light or heavy bleed on a limb when applied.
+items.Splint_Crude_Fracture.name = Crude Splint
+items.Splint_Crude_Fracture.description = Heals a limb that has a fracture when applied.
+general.damageCauses.Bleed = bleed damage
+general.damageCauses.HeavyBleed = heavy bleed damage
+items.Survival_Kit_Crude.name = Crude Survival Kit
+items.Survival_Kit_Crude.description = Heals a limb that has reached 0 hp and repairs it.

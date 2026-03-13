@@ -1,0 +1,430 @@
+$Common = "Common.ui";
+
+@Background = PatchStyle(TexturePath: "MyBackground.png");
+
+Group {
+    LayoutMode: Center;
+
+    Group #BodyPartPanel {
+        Background: @Background;
+        Anchor: (Width: 1115.0001, Height: 859.16675);
+
+        Label #TitleLabel {
+            Text: "Perform Surgery";
+            Style: (HorizontalAlignment: Center, FontSize: 20, RenderBold: true, TextColor: #ffffff);
+            Anchor: (Width: 500, Height: 30, Top: 20);
+        }
+        // === VISUAL BODY MODEL ===
+        // HEAD
+        Group #HeadModel {
+            Anchor: (Left: 500, Top: 120, Width: 100, Height: 94.28572);
+            Background: #00FF00(1.0);
+            LayoutMode: Center;
+            Padding: (Full: 0);
+        }
+        // TORSO
+        Group #TorsoModel {
+            Anchor: (Left: 478, Top: 236, Width: 144.66666, Height: 259.3335);
+            Background: #00FF00(1.0);
+            LayoutMode: Center;
+            Padding: (Full: 0);
+        }
+        // RIGHT ARM
+        Group #RightArmModel {
+            Anchor: (Left: 401.42856, Top: 260, Width: 48.571434, Height: 228.57143);
+            Background: #00FF00(1.0);
+            LayoutMode: Center;
+            Padding: (Full: 0);
+        }
+        // LEFT ARM
+        Group #LeftArmModel {
+            Anchor: (Left: 650, Top: 260, Width: 45.714283, Height: 227.61906);
+            Background: #00FF00(1.0);
+            LayoutMode: Center;
+            Padding: (Full: 0);
+        }
+        // RIGHT LEG
+        Group #RightLegModel {
+            Anchor: (Left: 484, Top: 510, Width: 51.25, Height: 280);
+            Background: #00FF00(1.0);
+            LayoutMode: Center;
+            Padding: (Full: 0);
+        }
+        // LEFT LEG
+        Group #LeftLegModel {
+            Anchor: (Left: 563.5, Top: 511.25, Width: 52.5, Height: 280);
+            Background: #00FF00(1.0);
+            LayoutMode: Center;
+            Padding: (Full: 0);
+        }
+        // === TEXT LABELS - HEALTH ===
+        Label #HeadHealth {
+            Anchor: (Left: 276, Top: 111.08334, Width: 241.91666, Height: 50.166664);
+            Text: "Head: 10/10";
+            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+        }
+
+        Label #TorsoHealth {
+            Anchor: (Left: 607, Top: 171, Width: 238.5, Height: 40.25);
+            Text: "Torso: 30/30";
+            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+        }
+
+        Label #RightArmHealth {
+            Anchor: (Left: 178, Top: 324, Width: 248.75, Height: 36.25);
+            Text: "R Arm: 15/15";
+            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+        }
+
+        Label #LeftArmHealth {
+            Anchor: (Left: 680, Top: 327, Width: 218.75, Height: 37.5);
+            Text: "L Arm: 15/15";
+            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+        }
+
+        Label #RightLegHealth {
+            Anchor: (Left: 190, Top: 620, Width: 261.25, Height: 32);
+            Text: "R Leg: 15/15";
+            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+        }
+
+        Label #LeftLegHealth {
+            Anchor: (Left: 626, Top: 619, Width: 226, Height: 35);
+            Text: "L Leg: 15/15";
+            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+        }
+        // === FRACTURE STATUS LABELS ===
+        Label #HeadFracture {
+            Anchor: (Left: 45, Top: 65, Width: 100, Height: 15);
+            Text: "";
+            Style: (FontSize: 9, TextColor: #FFA500, HorizontalAlignment: Center);
+        }
+
+        Label #TorsoFracture {
+            Anchor: (Left: 370, Top: 95, Width: 100, Height: 15);
+            Text: "";
+            Style: (FontSize: 9, TextColor: #FFA500, HorizontalAlignment: Center);
+        }
+
+        Label #RightArmFracture {
+            Anchor: (Left: 20, Top: 172, Width: 80, Height: 15);
+            Text: "";
+            Style: (FontSize: 9, TextColor: #FFA500, HorizontalAlignment: Center);
+        }
+
+        Label #LeftArmFracture {
+            Anchor: (Left: 410, Top: 172, Width: 80, Height: 15);
+            Text: "";
+            Style: (FontSize: 9, TextColor: #FFA500, HorizontalAlignment: Center);
+        }
+
+        Label #RightLegFracture {
+            Anchor: (Left: 45, Top: 275, Width: 80, Height: 15);
+            Text: "";
+            Style: (FontSize: 9, TextColor: #FFA500, HorizontalAlignment: Center);
+        }
+
+        Label #LeftLegFracture {
+            Anchor: (Left: 385, Top: 275, Width: 80, Height: 15);
+            Text: "";
+            Style: (FontSize: 9, TextColor: #FFA500, HorizontalAlignment: Center);
+        }
+    }
+}
+
+Group #TorsoBarFrame {
+    Anchor: (Left: 1052.5, Top: 304.70233, Width: 150, Height: 20);
+    Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
+    Background: "ContainerPanelLightPatch.png";
+
+    Group #TorsoBarContainer {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Background: "ProgressBar.png";
+
+        ProgressBar #TorsoBar {
+            BarTexturePath: "ProgressBarFill.png";
+            Value: 0.9;
+            EffectTexturePath: "ProgressBarEffect.png";
+            EffectWidth: 68;
+            EffectHeight: 20;
+            EffectOffset: 0;
+        }
+    }
+}
+
+Group #HeadBarFrame {
+    Anchor: (Left: 723.88885, Top: 245.91661, Width: 150, Height: 20);
+    Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
+    Background: "ContainerPanelLightPatch.png";
+
+    Group #HeadBarContainer {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Background: "ProgressBar.png";
+
+        ProgressBar #HeadBar {
+            BarTexturePath: "ProgressBarFill.png";
+            Value: 0.9;
+            EffectTexturePath: "ProgressBarEffect.png";
+            EffectWidth: 68;
+            EffectHeight: 20;
+            EffectOffset: 0;
+        }
+    }
+}
+
+Group #RightArmFrame {
+    Anchor: (Left: 627.3967, Top: 461.36902, Width: 150, Height: 20);
+    Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
+    Background: "ContainerPanelLightPatch.png";
+
+    Group #RightArmContainer {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Background: "ProgressBar.png";
+
+        ProgressBar #RightArmBar {
+            BarTexturePath: "ProgressBarFill.png";
+            Value: 0.9;
+            EffectTexturePath: "ProgressBarEffect.png";
+            EffectWidth: 68;
+            EffectHeight: 20;
+            EffectOffset: 0;
+        }
+    }
+}
+
+Group #LeftArmFrame {
+    Anchor: (Left: 1114.4681, Top: 463.35712, Width: 150, Height: 20);
+    Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
+    Background: "ContainerPanelLightPatch.png";
+
+    Group #LeftArmContainer {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Background: "ProgressBar.png";
+
+        ProgressBar #LeftArmBar {
+            BarTexturePath: "ProgressBarFill.png";
+            Value: 0.9;
+            EffectTexturePath: "ProgressBarEffect.png";
+            EffectWidth: 68;
+            EffectHeight: 20;
+            EffectOffset: 0;
+        }
+    }
+}
+
+Group #RightLegFrame {
+    Anchor: (Left: 646.7461, Top: 755.39557, Width: 150, Height: 20);
+    Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
+    Background: "ContainerPanelLightPatch.png";
+
+    Group #RightLegContainer {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Background: "ProgressBar.png";
+
+        ProgressBar #RightLegBar {
+            BarTexturePath: "ProgressBarFill.png";
+            Value: 0.9;
+            EffectTexturePath: "ProgressBarEffect.png";
+            EffectWidth: 68;
+            EffectHeight: 20;
+            EffectOffset: 0;
+        }
+    }
+}
+
+Group #LeftLegFrame {
+    Anchor: (Left: 1066.1666, Top: 755.39557, Width: 150, Height: 20);
+    Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
+    Background: "ContainerPanelLightPatch.png";
+
+    Group #LeftLegContainer {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Background: "ProgressBar.png";
+
+        ProgressBar #LeftLegBar {
+            BarTexturePath: "ProgressBarFill.png";
+            Value: 0.9;
+            EffectTexturePath: "ProgressBarEffect.png";
+            EffectWidth: 68;
+            EffectHeight: 20;
+            EffectOffset: 0;
+        }
+    }
+}
+
+$Common.@BackButton {
+}
+
+Group #TorsoFractureIcon {
+    Anchor: (Left: 1075.2502, Top: 251.23195, Width: 45, Height: 38);
+    Background: "FractureBone.png";
+    Visible: true;
+    HitTestVisible: true;
+    TooltipText: "Torso fracture // Stamina reduced // Heal with a splint!";
+}
+
+Group #TorsoBleedIcon {
+    Anchor: (Left: 1144.0535, Top: 253.77377, Width: 30, Height: 30);
+    Background: "Blood.png";
+    Visible: true;
+    HitTestVisible: true;
+    TooltipText: "Torso bleeding // Heal with a bandage!";
+}
+
+Group #TorsoHeavyBleedIcon {
+    Anchor: (Left: 1144.7622, Top: 253.4394, Width: 30, Height: 30);
+    Background: "HeavyBlood.png";
+    Visible: true;
+    HitTestVisible: true;
+    TooltipText: "Torso heavy bleeding // Heal with a bandage!";
+}
+
+Group #HeadFractureIcon {
+    Anchor: (Left: 747.2346, Top: 184.02269, Width: 45, Height: 38);
+    Background: "FractureBone.png";
+    Visible: true;
+    TooltipText: "Head fracture // Vision reduced // Heal with a splint!";
+    HitTestVisible: true;
+}
+
+Group #HeadBleedIcon {
+    Anchor: (Left: 814.7727, Top: 189.87117, Width: 30, Height: 30);
+    Background: "Blood.png";
+    Visible: true;
+    TooltipText: "Head bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #HeadHeavyBleedIcon {
+    Anchor: (Left: 814.5454, Top: 190.87117, Width: 30, Height: 30);
+    Background: "HeavyBlood.png";
+    Visible: true;
+    TooltipText: "Head heavy bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #RightArmFractureIcon {
+    Anchor: (Left: 649.7877, Top: 397.94693, Width: 45, Height: 38);
+    Background: "FractureBone.png";
+    Visible: true;
+    TooltipText: "Arm fracture // Damage dealt reduced // Heal with a splint!";
+    HitTestVisible: true;
+}
+
+Group #RightArmBleedIcon {
+    Anchor: (Left: 723.0454, Top: 402.41663, Width: 30, Height: 30);
+    Background: "Blood.png";
+    Visible: true;
+    TooltipText: "Arm bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #RightArmHeavyBleedIcon {
+    Anchor: (Left: 722.6047, Top: 404.46964, Width: 30, Height: 30);
+    Background: "HeavyBlood.png";
+    Visible: true;
+    TooltipText: "Arm heavy bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #LeftArmFractureIcon {
+    Anchor: (Left: 1138.0426, Top: 398.35266, Width: 45, Height: 38);
+    Background: "FractureBone.png";
+    Visible: true;
+    TooltipText: "Arm fracture // Damage dealt reduced // Heal with a splint!";
+    HitTestVisible: true;
+}
+
+Group #LeftArmBleedIcon {
+    Anchor: (Left: 1208.9069, Top: 403.51077, Width: 30, Height: 30);
+    Background: "Blood.png";
+    Visible: true;
+    TooltipText: "Arm bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #LeftArmHeavyBleedIcon {
+    Anchor: (Left: 1208.091, Top: 405.12122, Width: 30, Height: 30);
+    Background: "HeavyBlood.png";
+    Visible: true;
+    TooltipText: "Arm heavy bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #RightLegFractureIcon {
+    Anchor: (Left: 672.619, Top: 689.04755, Width: 45, Height: 38);
+    Background: "FractureBone.png";
+    Visible: true;
+    TooltipText: "Leg fracture // Movement speed reduced // Heal with a splint!";
+    HitTestVisible: true;
+}
+
+Group #RightLegBleedIcon {
+    Anchor: (Left: 739.7938, Top: 695.3928, Width: 30, Height: 30);
+    Background: "Blood.png";
+    Visible: true;
+    TooltipText: "Leg bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #RightLegHeavyBleedIcon {
+    Anchor: (Left: 738.8331, Top: 697.4881, Width: 30, Height: 30);
+    Background: "HeavyBlood.png";
+    Visible: true;
+    TooltipText: "Leg heavy bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #LeftLegFractureIcon {
+    Anchor: (Left: 1089.2502, Top: 690.03564, Width: 45, Height: 38);
+    Background: "FractureBone.png";
+    Visible: true;
+    TooltipText: "Leg fracture // Movement speed reduced // Heal with a splint!";
+    HitTestVisible: true;
+}
+
+Group #LeftLegBleedIcon {
+    Anchor: (Left: 1154.9962, Top: 695.03564, Width: 30, Height: 30);
+    Background: "Blood.png";
+    Visible: true;
+    TooltipText: "Leg bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+Group #LeftLegHeavyBleedIcon {
+    Anchor: (Left: 1155.2264, Top: 696.8809, Width: 30, Height: 30);
+    Background: "HeavyBlood.png";
+    Visible: true;
+    TooltipText: "Leg heavy bleeding // Heal with a bandage!";
+    HitTestVisible: true;
+}
+
+$Common.@SecondaryTextButton #HeadSurgeryButton {
+    Text: "Surgery";
+    Anchor: (Left: 727.2461, Top: 271.91663, Width: 135, Height: 36);
+}
+
+$Common.@SecondaryTextButton #TorsoSurgeryButton {
+    Text: "Surgery";
+    Anchor: (Left: 1060, Top: 328.41663, Width: 135, Height: 36);
+}
+
+$Common.@SecondaryTextButton #RightArmSurgeryButton {
+    Text: "Surgery";
+    Anchor: (Left: 633.06793, Top: 492.61905, Width: 135, Height: 36);
+}
+
+$Common.@SecondaryTextButton #LeftArmSurgeryButton {
+    Text: "Surgery";
+    Anchor: (Left: 1124.375, Top: 492.61905, Width: 135, Height: 36);
+}
+
+$Common.@SecondaryTextButton #RightLegSurgeryButton {
+    Text: "Surgery";
+    Anchor: (Left: 652.49994, Top: 786, Width: 135, Height: 36);
+}
+
+$Common.@SecondaryTextButton #LeftLegSurgeryButton {
+    Text: "Surgery";
+    Anchor: (Left: 1070.5426, Top: 786, Width: 135, Height: 36);
+}

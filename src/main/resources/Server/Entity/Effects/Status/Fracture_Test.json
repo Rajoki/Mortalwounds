@@ -1,0 +1,18 @@
+{
+  "Duration": 360,
+  "ApplicationEffects": {
+    "EntityBottomTint": "#80ecff",
+    "ModelVFXId": "Intangible_Dark",
+    "ScreenEffect": "ScreenEffects/Sand.png",
+    "EntityTopTint": "#da72ff",
+    "HorizontalSpeedMultiplier": 0.75,
+    "MovementEffects": {
+      "DisableSprint": true
+    },
+    "LocalSoundEventId": "SFX_Bone_Break",
+    "WorldSoundEventId": "SFX_Bone_Break"
+  },
+  "OverlapBehavior": "Overwrite",
+  "StatusEffectIcon": "Icons/ResourceTypes/Any_Bone.png",
+  "Debuff": true
+}

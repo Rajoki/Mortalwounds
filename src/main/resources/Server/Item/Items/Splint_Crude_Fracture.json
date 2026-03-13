@@ -1,0 +1,84 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Splint_Crude_Fracture.name",
+    "Description": "server.items.Splint_Crude_Fracture.description"
+  },
+  "Quality": "Common",
+  "Icon": "Icons/ItemsGenerated/Deco_Scroll.png",
+  "PlayerAnimationsId": {
+    "Parent": "Item",
+    "Animations": {
+      "Consume": {
+        "FirstPerson": "Characters/Animations/Items/Main_Handed/Item/Attacks/Eat_Side/Eat_Side_FPS.blockyanim",
+        "ThirdPerson": "Characters/Animations/Items/Main_Handed/Item/Attacks/Eat_Side/Eat_Side.blockyanim",
+        "Speed": 1,
+        "Looping": true
+      }
+    }
+  },
+  "BlockType": {
+    "Material": "Empty",
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Miscellaneous/Scrolls.blockymodel",
+    "ParticleColor": "#d5825d",
+    "CustomModelScale": 0.5,
+    "CubeShadingMode": "Standard",
+    "Opacity": "Solid",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Miscellaneous/Scrolls_Texture.png"
+      }
+    ]
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "Quantity": 2,
+        "ItemId": "Ingredient_Fibre"
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 4
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Survival"
+        ],
+        "Id": "Workbench"
+      },
+      {
+        "Type": "Crafting",
+        "Id": "Fieldcraft",
+        "Categories": [
+          "Tools"
+        ]
+      }
+    ],
+    "TimeSeconds": 1,
+    "OutputQuantity": 1
+  },
+  "InteractionVars": {
+    "Effect": {
+      "Interactions": [
+        {
+          "Type": "OpenCustomUI",
+          "Page": {
+            "Id": "SplintSelectionNew"
+          }
+        }
+      ]
+    }
+  },
+  "MaxStack": 25,
+  "Scale": 3,
+  "DropOnDeath": true,
+  "Model": "Blocks/Miscellaneous/Scrolls.blockymodel",
+  "Texture": "Blocks/Miscellaneous/Scrolls_Texture.png",
+  "Parent": "Template_Food",
+  "Interactions": {
+    "Secondary": "Charge_Open_UI_FirstAid"
+  }
+}
