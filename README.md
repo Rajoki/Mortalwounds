@@ -1,334 +1,199 @@
-# Survival Overhaul - Mortal Wounds
+Survival Overhaul - Mortal Wounds
+Version 1.6.0 - NPC injury systems expanded! Torso fractures now cause NPCs to take increased damage. Head fractures cause NPCs to miss attacks 50% of the time with "MISS" displayed instead of damage.
 
-1.4.0 - Crouching now effects damage direction! Crouch while attacking for "low" attacks. If on the same level as the target, have a chance to hit either torso or legs. If you're on lower ground and crouching, you'll have a higher chance to hit legs.
-1.3.1 + 1.3.2 - Removed many server/debug logs I had on. I think I got them all this time, sorry about that!
-1.3.0 Update
-Major update expanding the injury system beyond players.
+Player torso fractures now increase stamina consumption by 1.5x.
 
-NPCs now use the same body part damage and injury system, meaning enemies can receive fractures, bleeds, and heavy bleeds on specific limbs just like players.
+1.5.0 - Tutorial UI and welcome message. Golem loot drops. Config rebalance. /mwstats reminder text in HUD.
 
-Examples
+Getting Started
+Your body is now 6 limbs: head, torso, left/right arms, left/right legs. Each has separate health shown in your HUD (green = healthy, yellow = injured, red = critical, black = destroyed).
 
-• Breaking a skeleton’s head may cause bone fragments to drop
-• Breaking a wolf’s torso can drop hide
-• Breaking a goblin’s arm may cause it to drop its weapon
+Damage is directional. Attacks from above/jumping hit the head. Crouch attacks/being below the target hit legs. Position matters.
 
-This is currently a basic implementation, but the system is configurable. Players and server owners can add any mobs, and item drops through the config.
+Injuries happen when hit: Bleeds (damage over time), Fractures (reduce effectiveness), Destroyed limbs (need survival kit).
 
-Other additions and improvements:
+Effects vary by limb:
 
-• NPC body part injuries (bleeds, heavy bleeds, fractures)
+Arm fractures = less damage dealt (per each arm)
+Leg fractures = slower movement (per each leg)
+Torso fractures = 1.5x stamina drain
+Head fractures = vision impaired
+Healing items:
 
-Creature-specific traits (skeletons can't bleed, golems resist fractures)
-• Body-part-based NPC loot drops (configurable)
-Weapon modifiers now affect both player and NPC injuries
-• Damage popup text showing injuries inflicted on enemies
-• Headshots now deal bonus damage
-• Improved body part hit detection
-Hits from above are more likely to strike the head
-Hits from below are more likely to strike legs
-Side hits distribute damage between torso and limbs
-Smart hit detection adapts to creature anatomy (humanoids, quadrupeds, spiders)
-• Heavy damage bonus system - larger/stronger hits have higher chances to cause injuries. Doing over 50% of a limbs damage in one strike will have a higher chance for bleed/fractures.
-• Improved combat feedback when damaging NPC limbs - sound effects played, damage text displayed.
-Balance / System Changes
+Bandages stop bleeding
+Splints heal fractures
+Survival Kits repair destroyed limbs
+Craft these in your inventory using basic materials (fiber, sticks, rubble).
 
-• Torso fracture stamina reduction temporarily removed while the system is redesigned
-• Torso fractures currently have no gameplay effect
-• Several internal improvements to the injury and hit detection systems
+NPCs use the same system. Break their legs to slow them. Break their head to make them miss attacks. Break their arms to reduce their damage. Destroy limbs for extra loot drops.
 
-In Progress
+Different types/anatomies can have different effects! Bears are quadrupeds - fracture their front legs to reduce damage they deal AND movement speed.
 
-• Visual effects and particles for injuries are being implemented
-• A small bug currently causes a delay in the effects, so they are temporarily disabled while being fixed
+Commands: /mwstats (detailed UI), /mwtextstats (chat summary), /mwtutorial (interactive guide)
 
 Hardcore Injury System for Hytale
-Mortal Wounds transforms combat into a true survival experience. Inspired by hardcore survival games like Outward and Escape from Tarkov, damage now has lasting consequences. You are no longer a single health bar.
+Mortal Wounds transforms combat into a survival experience. Inspired by Outward and Escape from Tarkov, damage has lasting consequences. You are no longer a single health bar.
 
-Features
-Body Part and Locational Damage
-Your character now has individual body parts:
+Body Part Damage
+Six body parts with individual health:
 
 Head
 Torso
-Left Arm
-Right Arm
-Left Leg
-Right Leg
+Left/Right Arms
+Left/Right Legs
+Each limb's health scales with your max health and armor. Better armor/food buffs = stronger limbs.
 
-Each limb has its own health pool based on a percentage of your maximum health. Increase your max health or armor and each limb becomes stronger as well.
+Directional damage. Height and angle determine what gets hit:
 
-Damage is locational. The height and direction of the hit determines which body part takes damage.
+Strikes from above/jumping hit the head
+Low swings hit legs
+Side attacks hit torso/arms/legs
+Crouching while attacking targets legs
+Fall damage hits legs first with increased fracture chance.
 
-A strike from above may hit the head.
-A low swing may hit the legs.
-Positioning now matters.
+Excess damage from a destroyed limb transfers to other parts.
 
-Falling from a height will hurt your legs first.
-
-If a body part reaches 0 health and is struck again, excess damage will transfer to the closest or a random remaining body part.
-
-Your HUD displays each limb’s health in real time:
-
-Green = Healthy
-Yellow = Injured
-Red = Critically Damaged
-Black = Destroyed
-
-
-
-
-
-Your HUD will also show status icons next to that limb if you have any bleeds or fractures.
-
-If you have the AutoMultiHud mod installed, the limb HUD can be moved and configured freely using the in-game /amh command.
-
-Use /mwstats to open a detailed UI of your limb health.
-
-Use /mwtextstats to display your condition in chat.
+Real-time HUD shows limb health and status icons for bleeds/fractures. Works with AutoMultiHud for custom positioning.
 
 Injury System
-Taking damage has a configurable chance to apply injuries to the specific body part that was hit.
-
-Fall damage damages legs first and has a heightened chance to cause fractures.
-
-All chances and values listed below are configurable.
+Configurable chance to apply injuries to the struck body part.
 
 
 
-Bleed
+Bleeds
+
 Damage over time
-Moderate severity
+Two bleeds on same limb = heavy bleed
+Heavy bleeds last longer and deal more damage
+Lower chance for direct heavy bleeds
+Fractures Apply unique penalties per limb:
 
-Configurable damage amount, interval, and duration.
-
-If you receive another bleed on the same limb that already has one, it becomes a heavy bleed.
-
-Heavy Bleed
-Higher damage over time
-Lasts longer
-Much more dangerous if untreated
-
-Fractures
-Fractures apply unique effects depending on the limb.
-
-Arm Fracture
-Reduces damage dealt.
-
-One arm fractured reduces damage.
-Both arms fractured reduces it further.
-
-Leg Fracture
-Reduces movement speed.
-
-One leg fractured reduces speed.
-Both legs reduce it further.
-
-Torso Fracture
-Currently has no gameplay effect while the system is being redesigned.
-
-Head Fracture
-Applies a visual impairment effect.
-
-Fracture duration can be enabled or disabled in the config.
+Arms: Reduced damage (one arm = minor penalty, both arms = major)
+Legs: Reduced movement (one leg = minor penalty, both legs = major)
+Torso: 1.5x stamina consumption rate
+Head: Visual impairment effect
+Fracture duration is configurable.
 
 NPC Injury System
-Enemies now use the same body part damage and injury system.
+Enemies suffer the same injuries as players:
 
-NPCs can suffer:
+Bleeds (damage over time)
+Heavy bleeds
+Fractures (movement/attack penalties)
+Destroyed limbs (loot drops)
+NPC-specific injury effects:
 
-• Bleeds
-• Heavy Bleeds
-• Fractures
-• Destroyed limbs
+Torso fractures: Take more damage
+Head fractures: % chance to miss attacks (displays "MISS" instead of damage)
+Leg fractures: Slower movement, forced to crouch when both legs broken
+Combat has visible consequences. Damage numbers and injury text appear when hitting NPCs for feedback.
 
-This allows combat to have visible consequences, such as enemies walking slower, forced to crouch when legs broken, suffering damage over time, or dropping items from specific body parts.
+NPC Loot System
+Destroying specific body parts can drop unique items:
 
-Damage numbers and injury notifications now appear when damaging NPCs to show what effects were applied.
+Skeleton head → bone fragments
+Goblin arm → weapon drop
+Spider abdomen → silk
+Golem torso → gems/ores
+Golem limbs → shards
+Fully configurable through the config file. Add custom mobs and drops as you desire.
 
-NPC Body Part Loot System
-Enemies can drop items depending on which body part is destroyed.
+Medical Treatment
+Three healing items:
 
-Examples:
+Crude Bandages: Remove bleeds/heavy bleeds
 
-Breaking a skeleton head → bone fragments
-Breaking a goblin arm → weapon drop
-Breaking a spider abdomen → silk
+Crude Splints: Heal fractures 
+Crude Survival Kits: Repair destroyed limbs
+Using an item opens a body part selection UI. Choose which limb to treat. Each item heals one condition.
 
-The system is fully configurable, allowing players and servers to add:
-
-• new mobs
-• custom item drops
-
-through the config file.
-
-Medical Items and Treatment
-Using a Crude Bandage, Crude Splint, or Crude Survival Kit now opens a body part selection UI.
-
-
-
-
-
-
-You choose which limb to treat.
-
-Bandages remove bleeds and heavy bleeds.
-Splints heal fractures.
-Survival Kits repair destroyed limbs.
-
-Each item heals one condition at a time.
+Craft all items in your inventory or at workbenches using fiber, sticks, and rubble.
 
 Commands
-/mwstats
-Opens a detailed limb status UI
+/mwtutorial - Interactive tutorial UI
 
-/mwtextstats
-Shows limb health and injuries in chat
+/mwstats - Detailed limb status UI
 
-/mwheal
-Admin command that removes injuries
+/mwtextstats - Limb health/injuries in chat
 
-/injury
-Tests if the injury system is working
+/mwheal - Admin: remove all injuries
 
-/randomhit
-Tests the injury roll system
-
-Built as Part of a Larger Survival Vision
-Mortal Wounds is part of a planned full survival overhaul for Hytale.
-
-Future systems will expand combat, injuries, treatment, and survival mechanics.
-
-Planned features include:
-
-• More injury types (burns, magic damage)
-• Damage scaling for injury chances
-• Higher tier medical items
-• Temporary painkillers and quick treatment items
-
-Configurable Options
-Many aspects of Mortal Wounds can be customized in the mortalwounds_config file located in your world folder.
+Configuration
+Customize nearly everything in mortalwounds_config (located in your world folder).
 
 Injury Chances
-bodyPartFractureChance
-Base chance for fractures
 
-bodyPartBleedChance
-Base chance for bleeds
-
-heavyBleedChance
-Chance a bleed becomes a heavy bleed
-
+bodyPartFractureChance - Base fracture chance
+bodyPartBleedChance - Base bleed chance
+heavyBleedChance - Bleed upgrade chance
 Weapon Modifiers
-slashmodifier
-Extra injury chance from slashing weapons
 
-bludgeonmodifier
-Extra injury chance from blunt weapons
-
-npcSlashModifier
-Modifier for NPC attacks that count as slashing
-
-npcBludgeonModifier
-Modifier for NPC attacks that count as blunt damage
-
+slashmodifier - Slash weapon injury bonus
+bludgeonmodifier - Blunt weapon injury bonus
+npcSlashModifier / npcBludgeonModifier - NPC attack modifiers
 Bleed Settings
-bleedDamageAmount
-Damage per bleed tick
 
-bleedDamageInterval
-Time between bleed damage ticks
-
-bleedDurationSeconds
-Total bleed duration
-
-Heavy Bleeds
-heavyBleedDamageAmount
-Damage per tick
-
-heavyBleedDamageInterval
-
-heavyBleedDurationSeconds
-
+bleedDamageAmount - Damage per tick
+bleedDamageInterval - Time between ticks
+bleedDurationSeconds - Total duration
+Heavy bleed variants available
 Fractures
-armFractureDamageReduction1Arm
-Damage reduction when one arm is fractured
 
-armFractureDamageReduction2Arms
-Damage reduction when both arms are fractured
-
-legFractureSpeedReduction1Leg
-Movement reduction for one fractured leg
-
-legFractureSpeedReduction2Legs
-
-enableFractureDuration
-Enables timed fracture healing
-
+armFractureDamageReduction1Arm / 2Arms
+legFractureSpeedReduction1Leg / 2Legs
+enableFractureDuration - Timed healing on/off
 fractureDurationSeconds
+Heavy Damage System
 
-Treatment Settings
-treatMultipleWounds
-Keeps the treatment UI open to treat multiple injuries
+heavyDamageThreshold - Damage % for heavy hit
+heavyDamageFractureBonus - Extra fracture chance
+heavyDamageBleedBonus - Extra bleed chance
+NPC Settings
 
-NPC Injury Chances
 npcBodyPartFractureChance
-
 npcBodyPartBleedChance
-
 npcHeavyBleedChance
+headshotDamageBonus - How much damage is multiplied for with headshots - effective on both NPCs and players
+Treatment
 
-Heavy Damage Bonus System
-heavyDamageThreshold
-Damage percentage that counts as a heavy hit
+treatMultipleWounds - Keep UI open for batch healing
+Loot Tables Configure drops per mob and body part:
 
-heavyDamageFractureBonus
-Extra fracture chance for heavy hits
-
-heavyDamageBleedBonus
-Extra bleed chance for heavy hits
-
-NPC Loot Table Configuration
-The npcLootTables section allows you to define drops based on mob type and body part.
-
-Example:
-
-
+ 
+ 
+json
 "skeleton": {
-"HEAD": [
-{
-"itemId": "Ingredient_Bone_Fragment",
-"minAmount": 1,
-"maxAmount": 1,
-"dropChance": 0.2
+  "HEAD": [{
+    "itemId": "Ingredient_Bone_Fragment",
+    "minAmount": 1,
+    "maxAmount": 1,
+    "dropChance": 0.2
+  }]
 }
-]
-}
+Use "ANY" as body part key for drops from any destroyed limb.
 
-This means:
+Part of a Larger Vision
+Mortal Wounds is the foundation of a full survival overhaul for Hytale.
 
-If a skeleton's head is destroyed, it has a 20% chance to drop a bone fragment.
+Planned features:
 
-Special Key: Use "ANY" for that mob to drop items from any part of it that is destroyed.
-
-You can add your own mobs, body parts, and items to customize drops.
-
+More injury types (burns, magic damage)
+Higher tier medical items
+Temporary painkillers and quick treatment
 Known Issues
-I haven’t been able to test it extensively on multiplayer servers yet, so feedback is appreciated.
+Limited multiplayer testing. Feedback appreciated.
 
-Dynamic HUD updates can sometimes conflict with other UI mods.
+HUD updates may conflict with some UI mods.
 
-If you die from a bleed or other injury, the death message may display incorrectly.
+Death from injuries may show incorrect death messages.
 
 Changelog
-1.2.2
-Bug fix for torso fracture stamina clamp issue.
+1.6.0 - Player torso fractures now increase stamina drain (1.5x). NPC torso fractures increase damage taken (1.5x). NPC head fractures cause 50% miss chance. Tutorial system added. Golem loot tables added. Injury chances rebalanced.
 
-1.2.1
-Reduced time to use medical items.
+1.5.0 - Tutorial UI and welcome message. Golem loot drops. Config rebalance. /mwstats reminder text in HUD.
 
-1.2.0
-Added head concussion visual effect for head fractures.
+1.4.0 - Crouching affects directional damage.
 
-Also fixed a bug where player HUDs sometimes did not appear after rejoining a server.
+1.3.0 - NPC injury system. Body part loot drops. Headshot damage bonus. Improved hit detection. Heavy damage bonuses.
 
+1.2.0 - Head fracture visual effect.
