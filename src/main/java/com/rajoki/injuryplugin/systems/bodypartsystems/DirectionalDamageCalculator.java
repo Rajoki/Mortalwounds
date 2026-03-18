@@ -178,7 +178,7 @@ public class DirectionalDamageCalculator {
         }
 
         // === SAME LEVEL OR DIDN'T HIT HEAD = Determine by angle ===
-        // From sides - always arms
+        // From sides = always arms
         if (isLeftSide) {
             return BodyPart.LEFTARM;
         } else if (isRightSide) {
@@ -211,7 +211,7 @@ public class DirectionalDamageCalculator {
 
 //            LOGGER.atInfo().log(String.format("Quadruped: Attacker crouching. dy=%.2f", dy));
 
-            // Crouching below target → ALWAYS LEGS
+            // Crouching below target -> ALWAYS LEGS
             if (dy < -0.5) {
 
 //                LOGGER.atInfo().log("Quadruped crouch: Below target → Legs");

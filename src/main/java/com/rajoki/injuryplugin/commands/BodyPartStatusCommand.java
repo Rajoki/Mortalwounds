@@ -19,7 +19,16 @@ import javax.annotation.Nonnull;
 public class BodyPartStatusCommand extends AbstractPlayerCommand {
 
     // /mwtextstats to show body parts in text form
-    // Right now displays ALL parts even from other anatomies, bugged
+
+    // Define only humanoid parts to display
+    private static final BodyPart[] HUMANOID_PARTS = {
+            BodyPart.HEAD,
+            BodyPart.TORSO,
+            BodyPart.LEFTARM,
+            BodyPart.RIGHTARM,
+            BodyPart.LEFTLEG,
+            BodyPart.RIGHTLEG
+    };
 
     public BodyPartStatusCommand() {
         super("mwtextstats", "Shows detailed body part status and current multipliers");
@@ -37,23 +46,25 @@ public class BodyPartStatusCommand extends AbstractPlayerCommand {
                 MortalWoundsPlugin.getInstance().getBodyPartComponentType());
 
         if (bodyPartComp == null || !bodyPartComp.isInitialized()) {
-            commandContext.sendMessage(Message.raw("§cBody part system not initialized!"));
+            commandContext.sendMessage(Message.raw("Body part system not initialized!"));
             return;
         }
 
         // Header
-        commandContext.sendMessage(Message.raw("§6========== Body Part Status =========="));
+        commandContext.sendMessage(Message.raw("========== Body Part Status =========="));
 
-        // Check each body part for fractures
-        for (BodyPart part : BodyPart.values()) {
+        // Check ONLY humanoid body parts
+        for (BodyPart part : HUMANOID_PARTS) {
             boolean hasFracture = bodyPartComp.hasBodyPartEffect(part, "FRACTURE");
             boolean hasBleed = bodyPartComp.hasBodyPartEffect(part, "BLEED");
+            boolean hasHeavyBleed = bodyPartComp.hasBodyPartEffect(part, "HEAVY_BLEED");
             float current = bodyPartComp.getBodyPartHealth(part);
             float max = bodyPartComp.getBodyPartMaxHealth(part);
 
             String status = "";
             if (hasFracture) status += "[FRACTURED]";
-            if (hasBleed) status += "[BLEEDING]";
+            if (hasHeavyBleed) status += "[HEAVY BLEED]";
+            else if (hasBleed) status += "[BLEEDING]";
             if (status.isEmpty()) status = "[OK]";
 
             String health = String.format("(%.0f/%.0f HP)", current, max);
@@ -83,7 +94,7 @@ public class BodyPartStatusCommand extends AbstractPlayerCommand {
         }
 
         commandContext.sendMessage(Message.raw(
-                String.format("Damage Output: §f%.0f%% §7(%s)", armDamageMultiplier * 100, armStatus)
+                String.format("Damage Output: %.0f%% (%s)", armDamageMultiplier * 100, armStatus)
         ));
 
         // Calculate leg fracture multiplier
@@ -97,14 +108,14 @@ public class BodyPartStatusCommand extends AbstractPlayerCommand {
             legSpeedMultiplier = 0.50f;
             legStatus = "2 Legs Fractured";
         } else if (leftLegFractured || rightLegFractured) {
-            legSpeedMultiplier = 0.25f;
+            legSpeedMultiplier = 0.75f;
             legStatus = "1 Leg Fractured";
         } else {
             legStatus = "No Leg Fractures";
         }
 
         commandContext.sendMessage(Message.raw(
-                String.format("Movement Speed: §f%.0f%% §7(%s)", legSpeedMultiplier * 100, legStatus)
+                String.format("Movement Speed: %.0f%% (%s)", legSpeedMultiplier * 100, legStatus)
         ));
 
         commandContext.sendMessage(Message.raw("======================================"));

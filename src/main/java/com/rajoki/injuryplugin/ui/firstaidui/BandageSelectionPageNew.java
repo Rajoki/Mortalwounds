@@ -171,7 +171,7 @@ public class BandageSelectionPageNew extends InteractiveCustomUIPage<BandageSele
                         bodyPartComp.hasBodyPartEffect(part, "HEAVY_BLEED"))) {
 
                     if (!consumeBandage(player)) {
-                        playerRef.sendMessage(Message.raw("§cYou need a bandage!"));
+                        playerRef.sendMessage(Message.raw("You need a bandage!"));
                         return;
                     }
 

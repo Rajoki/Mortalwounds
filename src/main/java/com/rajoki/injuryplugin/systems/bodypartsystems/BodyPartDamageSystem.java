@@ -152,7 +152,7 @@ public class BodyPartDamageSystem extends EntityEventSystem<EntityStore, Damage>
 
 //            if (playerRef != null) {
 //                playerRef.sendMessage(Message.raw(
-//                        String.format("§c%s DESTROYED!", hitPart.getDisplayName().toUpperCase())
+//                        String.format("%s DESTROYED!", hitPart.getDisplayName().toUpperCase())
 //                ));
 //            }
         }
@@ -322,7 +322,7 @@ public class BodyPartDamageSystem extends EntityEventSystem<EntityStore, Damage>
                     // Upgrade to heavy bleed
                     bodyPartComponent.removeBodyPartEffect(hitPart, "BLEED");
                     bodyPartComponent.addBodyPartEffect(hitPart, "HEAVY_BLEED");
-                    playSoundEffect(targetRef, store, "SFX_Bone_Break", 1.2f, 0.9f);
+                    playSoundEffect(targetRef, store, "SFX_Bone_Break", 1.2f, 5.0f);
 
                     if (transform != null) {
                         InjuryTextHelper.sendBleedText(targetRef, hitPart, true, transform.getPosition(), store, commandBuffer);
@@ -340,7 +340,7 @@ public class BodyPartDamageSystem extends EntityEventSystem<EntityStore, Damage>
                     if (heavyBleedRoll <= heavyBleedThreshold) {
                         // Direct heavy bleed
                         bodyPartComponent.addBodyPartEffect(hitPart, "HEAVY_BLEED");
-                        playSoundEffect(targetRef, store, "SFX_Bone_Break", 1.2f, 0.9f);
+                        playSoundEffect(targetRef, store, "SFX_Bone_Break", 2.0f, 5.0f);
 
                         if (transform != null) {
                             InjuryTextHelper.sendBleedText(targetRef, hitPart, true, transform.getPosition(), store, commandBuffer);
@@ -348,7 +348,7 @@ public class BodyPartDamageSystem extends EntityEventSystem<EntityStore, Damage>
                     } else {
                         // Regular bleed
                         bodyPartComponent.addBodyPartEffect(hitPart, "BLEED");
-                        playSoundEffect(targetRef, store, "SFX_Bone_Break", 0.8f, 1.2f);
+                        playSoundEffect(targetRef, store, "SFX_Bone_Break", 0.8f, 3.0f);
 
                         if (transform != null) {
                             InjuryTextHelper.sendBleedText(targetRef, hitPart, false, transform.getPosition(), store, commandBuffer);
@@ -405,7 +405,7 @@ public class BodyPartDamageSystem extends EntityEventSystem<EntityStore, Damage>
                         bodyPartComp.setBodyPartBroken(target, true);
 //                        if (playerRef != null) {
 //                            playerRef.sendMessage(Message.raw(
-//                                    String.format("§c%s DESTROYED (overflow)!", target.getDisplayName().toUpperCase())
+//                                    String.format("%s DESTROYED (overflow)!", target.getDisplayName().toUpperCase())
 //                            ));
 //                        }
                     }

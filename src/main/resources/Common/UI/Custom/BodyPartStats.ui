@@ -260,7 +260,7 @@ Group #TorsoFractureIcon {
     Background: "FractureBone.png";
     Visible: true;
     HitTestVisible: true;
-    TooltipText: "Torso fracture // Stamina reduced // Heal with a splint!";
+    TooltipText: "Torso fracture // Stamina usage increased // Heal with a splint!";
 }
 
 Group #TorsoBleedIcon {

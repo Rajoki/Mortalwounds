@@ -115,7 +115,7 @@ public class BodyPartBleedSystem extends DelayedEntitySystem<EntityStore> {
                     playerBleeds.remove(part);
 
 //                    playerRef.sendMessage(Message.raw(
-//                            String.format("§a%s stopped bleeding.", part.getDisplayName())
+//                            String.format("%s stopped bleeding.", part.getDisplayName())
 //                    ));
                 }
             } else {
@@ -187,9 +187,9 @@ public class BodyPartBleedSystem extends DelayedEntitySystem<EntityStore> {
         DamageSystems.executeDamage(ref, commandBuffer, bleedDamageEvent);
 
         // Notify player
-//        String bleedType = isHeavyBleed ? "§4§lHEAVILY BLEEDING" : "§4bleeding";
+//        String bleedType = isHeavyBleed ? "§lHEAVILY BLEEDING" : "bleeding";
 //        playerRef.sendMessage(Message.raw(
-//                String.format("§4%s is %s! (§c-%.0f HP§4)",
+//                String.format("%s is %s! (-%.0f HP§4)",
 //                        part.getDisplayName(), bleedType, bleedDamage)
 //        ));
     }
@@ -222,7 +222,7 @@ public class BodyPartBleedSystem extends DelayedEntitySystem<EntityStore> {
                     if (!bodyPartComp.isBodyPartBroken(target)) {
                         bodyPartComp.setBodyPartBroken(target, true);
 //                        playerRef.sendMessage(Message.raw(
-//                                String.format("§4%s DESTROYED (bleed overflow)!", target.getDisplayName().toUpperCase())
+//                                String.format("%s DESTROYED (bleed overflow)!", target.getDisplayName().toUpperCase())
 //                        ));
                     }
                 }

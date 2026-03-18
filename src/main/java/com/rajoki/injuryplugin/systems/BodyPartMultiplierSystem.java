@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.modules.entity.damage.DamageModule;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.rajoki.injuryplugin.components.BodyPartComponent;
 import com.rajoki.injuryplugin.components.npc.NPCBodyPartComponent;
+import com.rajoki.injuryplugin.config.MortalWoundsConfig;
 import com.rajoki.injuryplugin.systems.bodypartsystems.BodyPart;
 import com.rajoki.injuryplugin.systems.bodypartsystems.DirectionalDamageCalculator;
 
@@ -75,7 +76,7 @@ public class BodyPartMultiplierSystem extends EntityEventSystem<EntityStore, Dam
 
         if (hitPart == BodyPart.HEAD) {
             float originalDamage = damage.getAmount();
-            float headMultiplier = 1.2f;
+            float headMultiplier = MortalWoundsConfig.get().headshotDamageBonus;
 
             damage.setAmount(originalDamage * headMultiplier);
         }

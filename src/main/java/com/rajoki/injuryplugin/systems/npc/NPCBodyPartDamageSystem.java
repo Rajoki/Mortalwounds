@@ -209,7 +209,7 @@ public class NPCBodyPartDamageSystem extends EntityEventSystem<EntityStore, Dama
         String npcTypeId = (npc != null) ? npc.getNPCTypeId() : null;
 
         // === ALWAYS PLAY SOUND + TEXT WHEN LIMB DESTROYED ===
-        playSoundEffect(attackerRef, store, "SFX_Bone_Break", 3.0f, 0.8f);
+        playSoundEffect(attackerRef, store, "SFX_Bone_Break", 2.0f, 0.5f);
         // Display limb destroyed text
         if (transform != null) {
             InjuryTextHelper.sendLimbDestroyedText(targetRef, hitPart, transform.getPosition(), store, commandBuffer);
@@ -321,7 +321,7 @@ public class NPCBodyPartDamageSystem extends EntityEventSystem<EntityStore, Dama
 
             if (adjustedFractureRoll <= adjustedThreshold) {
                 npcBodyPart.addEffect(hitPart, "FRACTURE");
-                playSoundEffect(attackerRef, store, "SFX_Bone_Break", 1.8f, 0.7f);
+                playSoundEffect(attackerRef, store, "SFX_Bone_Break", 1.8f, 0.5f);
 
                 // Display floating text
                 if (transform != null) {
@@ -345,7 +345,7 @@ public class NPCBodyPartDamageSystem extends EntityEventSystem<EntityStore, Dama
 
 //            if (attackerPlayer != null) {
 //                attackerPlayer.sendMessage(Message.raw(
-//                        "§7This creature cannot bleed!"
+//                        "This creature cannot bleed!"
 //                ));
 //            }
         }
@@ -386,7 +386,7 @@ public class NPCBodyPartDamageSystem extends EntityEventSystem<EntityStore, Dama
                 if (heavyBleedRoll <= heavyBleedThreshold) {
                     //direct heavy bleed
                     npcBodyPart.addEffect(hitPart, "HEAVY_BLEED");
-                    playSoundEffect(attackerRef, store, "SFX_Bone_Break", 2.0f, 1.5f);
+                    playSoundEffect(attackerRef, store, "SFX_Bone_Break", 2.0f, 5.0f);
 
                     if (transform != null) {
                         InjuryTextHelper.sendBleedText(targetRef, hitPart, true, transform.getPosition(), store,
@@ -400,7 +400,7 @@ public class NPCBodyPartDamageSystem extends EntityEventSystem<EntityStore, Dama
                 } else {
                     // Regular bleed
                     npcBodyPart.addEffect(hitPart, "BLEED");
-                    playSoundEffect(attackerRef, store, "SFX_Bone_Break", 1.5f, 1.5f);
+                    playSoundEffect(attackerRef, store, "SFX_Bone_Break", 1.5f, 3.0f);
 
                     // Display floating text
                     if (transform != null) {
@@ -465,7 +465,7 @@ public class NPCBodyPartDamageSystem extends EntityEventSystem<EntityStore, Dama
                         position.getZ() + (ThreadLocalRandom.current().nextDouble() - 0.5) * 0.5
                 );
 
-                // Use the same method as the arrow drop mod
+                // Drop item near NPC
                 dropItemAtPosition(targetRef, itemStack, dropPos, commandBuffer);
 
 //                LOGGER.atInfo().log(String.format(

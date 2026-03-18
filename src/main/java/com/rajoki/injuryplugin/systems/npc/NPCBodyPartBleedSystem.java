@@ -21,13 +21,13 @@ import java.util.WeakHashMap;
 
 /**
  * Ported bleed system specifically for NPCs.
- * Handles damage over time and effect expiration for non-player entities.
+ * Handles damage over time and effect expiration for NPCs
  */
 public class NPCBodyPartBleedSystem extends DelayedEntitySystem<EntityStore> {
     private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private final ComponentType<EntityStore, NPCBodyPartComponent> npcBodyPartType;
 
-    // Use WeakHashMap to track timers without preventing NPC garbage collection
+    // Use WeakHashMap to track timers
     private final Map<NPCEntity, Map<BodyPart, BleedData>> npcBleedTimers = new WeakHashMap<>();
 
     public NPCBodyPartBleedSystem(ComponentType<EntityStore, NPCBodyPartComponent> npcBodyPartType) {
@@ -38,7 +38,7 @@ public class NPCBodyPartBleedSystem extends DelayedEntitySystem<EntityStore> {
     @Nonnull
     @Override
     public Query<EntityStore> getQuery() {
-        // Query only for your custom component to prevent startup null-reference crashes
+
         return this.npcBodyPartType;
     }
 
@@ -104,7 +104,7 @@ public class NPCBodyPartBleedSystem extends DelayedEntitySystem<EntityStore> {
                     activeBleeds.remove(part);
                 }
             } else {
-                // Clean up tracking if effect was removed (e.g., via a bandage system)
+                // Clean up tracking if effect was removed (ex. via a bandage system)
                 activeBleeds.remove(part);
             }
         }

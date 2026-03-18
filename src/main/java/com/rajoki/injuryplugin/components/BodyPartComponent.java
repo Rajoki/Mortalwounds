@@ -627,4 +627,18 @@ public class BodyPartComponent implements Component<EntityStore> {
         this.hasStoredOriginalMaxHealth = stored;
     }
 
+    private final Map<String, Float> customFloats = new HashMap<>();
+
+    public void setCustomFloat(String key, float value) {
+        customFloats.put(key, value);
+    }
+
+    public Float getCustomFloat(String key) {
+        return customFloats.get(key);
+    }
+
+    public void removeCustomFloat(String key) {
+        customFloats.remove(key);
+    }
+
 }

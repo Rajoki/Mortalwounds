@@ -1,3 +1,5 @@
+// === TUTORIAL ELEMENTS (OUTSIDE BodyPartPanel) ===
+
 $Common = "Common.ui";
 
 @Background = PatchStyle(TexturePath: "MyBackground.png");
@@ -10,7 +12,7 @@ Group {
         Anchor: (Width: 1115.0001, Height: 859.16675);
 
         Label #TitleLabel {
-            Text: "Apply Bandage";
+            Text: "MortalWounds Tutorial";
             Style: (HorizontalAlignment: Center, FontSize: 20, RenderBold: true, TextColor: #ffffff);
             Anchor: (Width: 500, Height: 30, Top: 20);
         }
@@ -32,14 +34,14 @@ Group {
         // RIGHT ARM
         Group #RightArmModel {
             Anchor: (Left: 401.42856, Top: 260, Width: 48.571434, Height: 228.57143);
-            Background: #00FF00(1.0);
+            Background: #000000(1.0);
             LayoutMode: Center;
             Padding: (Full: 0);
         }
         // LEFT ARM
         Group #LeftArmModel {
-            Anchor: (Left: 650, Top: 260, Width: 48.57, Height: 228.5);
-            Background: #00FF00(1.0);
+            Anchor: (Left: 650, Top: 260, Width: 45.714283, Height: 227.61906);
+            Background: #FFFF00(1.0);
             LayoutMode: Center;
             Padding: (Full: 0);
         }
@@ -52,8 +54,8 @@ Group {
         }
         // LEFT LEG
         Group #LeftLegModel {
-            Anchor: (Left: 563.5, Top: 511.25, Width: 51.25, Height: 280);
-            Background: #00FF00(1.0);
+            Anchor: (Left: 563.5, Top: 511.25, Width: 52.5, Height: 280);
+            Background: #FF4200(1.0);
             LayoutMode: Center;
             Padding: (Full: 0);
         }
@@ -66,14 +68,14 @@ Group {
 
         Label #TorsoHealth {
             Anchor: (Left: 607, Top: 171, Width: 238.5, Height: 40.25);
-            Text: "Torso: 30/30";
+            Text: "Torso: 28/30";
             Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
         }
 
         Label #RightArmHealth {
             Anchor: (Left: 178, Top: 324, Width: 248.75, Height: 36.25);
-            Text: "R Arm: 15/15";
-            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+            Text: "R Arm: 0/15";
+            Style: (FontSize: 20, TextColor: #000000, HorizontalAlignment: Center);
         }
 
         Label #LeftArmHealth {
@@ -90,8 +92,8 @@ Group {
 
         Label #LeftLegHealth {
             Anchor: (Left: 626, Top: 619, Width: 226, Height: 35);
-            Text: "L Leg: 15/15";
-            Style: (FontSize: 20, TextColor: #00FF00, HorizontalAlignment: Center);
+            Text: "L Leg: 2/15";
+            Style: (FontSize: 20, TextColor: #ff1111, HorizontalAlignment: Center);
         }
         // === FRACTURE STATUS LABELS ===
         Label #HeadFracture {
@@ -132,6 +134,39 @@ Group {
     }
 }
 
+Group #TutorialBox {
+    Anchor: (Left: 38.571457, Top: 25.714283, Width: 622.8571, Height: 172.85712);
+    Background: "ContainerPanelLightPatch.png";
+    Padding: (Full: 10);
+
+    Label #TutorialText {
+        Anchor: (Horizontal: 0, Vertical: 0);
+        Text: "Welcome to MortalWounds!";
+        Style: (FontSize: 14, TextColor: #FFFFFF, HorizontalAlignment: Center, VerticalAlignment: Center);
+    }
+
+    Label #PageCounter {
+        Anchor: (Left: 5, Bottom: -12, Width: 100, Height: 20);
+        Text: "1 / 8";
+        Style: (FontSize: 10, TextColor: #AAAAAA);
+    }
+}
+
+$Common.@SecondaryTextButton #BackButton {
+    Anchor: (Left: 97, Top: 212, Width: 120, Height: 35);
+    Text: "Back";
+}
+
+$Common.@SecondaryTextButton #NextButton {
+    Anchor: (Left: 507, Top: 212, Width: 120, Height: 35);
+    Text: "Next";
+}
+
+$Common.@SecondaryTextButton #CloseButton {
+    Anchor: (Left: 292, Top: 211, Width: 120, Height: 35);
+    Text: "Close";
+}
+
 Group #TorsoBarFrame {
     Anchor: (Left: 1052.5, Top: 304.70233, Width: 150, Height: 20);
     Padding: (Left: 2, Right: 2, Top: 2, Bottom: 2);
@@ -163,7 +198,7 @@ Group #HeadBarFrame {
 
         ProgressBar #HeadBar {
             BarTexturePath: "ProgressBarFill.png";
-            Value: 0.9;
+            Value: 1;
             EffectTexturePath: "ProgressBarEffect.png";
             EffectWidth: 68;
             EffectHeight: 20;
@@ -183,7 +218,7 @@ Group #RightArmFrame {
 
         ProgressBar #RightArmBar {
             BarTexturePath: "ProgressBarFill.png";
-            Value: 0.9;
+            Value: 0;
             EffectTexturePath: "ProgressBarEffect.png";
             EffectWidth: 68;
             EffectHeight: 20;
@@ -203,7 +238,7 @@ Group #LeftArmFrame {
 
         ProgressBar #LeftArmBar {
             BarTexturePath: "ProgressBarFill.png";
-            Value: 0.9;
+            Value: 0.5;
             EffectTexturePath: "ProgressBarEffect.png";
             EffectWidth: 68;
             EffectHeight: 20;
@@ -223,7 +258,7 @@ Group #RightLegFrame {
 
         ProgressBar #RightLegBar {
             BarTexturePath: "ProgressBarFill.png";
-            Value: 0.9;
+            Value: 1;
             EffectTexturePath: "ProgressBarEffect.png";
             EffectWidth: 68;
             EffectHeight: 20;
@@ -243,7 +278,7 @@ Group #LeftLegFrame {
 
         ProgressBar #LeftLegBar {
             BarTexturePath: "ProgressBarFill.png";
-            Value: 0.9;
+            Value: 0.2;
             EffectTexturePath: "ProgressBarEffect.png";
             EffectWidth: 68;
             EffectHeight: 20;
@@ -274,7 +309,7 @@ Group #TorsoBleedIcon {
 Group #TorsoHeavyBleedIcon {
     Anchor: (Left: 1144.7622, Top: 253.4394, Width: 30, Height: 30);
     Background: "HeavyBlood.png";
-    Visible: true;
+    Visible: false;
     HitTestVisible: true;
     TooltipText: "Torso heavy bleeding // Heal with a bandage!";
 }
@@ -322,7 +357,7 @@ Group #RightArmBleedIcon {
 Group #RightArmHeavyBleedIcon {
     Anchor: (Left: 722.6047, Top: 404.46964, Width: 30, Height: 30);
     Background: "HeavyBlood.png";
-    Visible: true;
+    Visible: false;
     TooltipText: "Arm heavy bleeding // Heal with a bandage!";
     HitTestVisible: true;
 }
@@ -394,37 +429,7 @@ Group #LeftLegBleedIcon {
 Group #LeftLegHeavyBleedIcon {
     Anchor: (Left: 1155.2264, Top: 696.8809, Width: 30, Height: 30);
     Background: "HeavyBlood.png";
-    Visible: true;
+    Visible: false;
     TooltipText: "Leg heavy bleeding // Heal with a bandage!";
     HitTestVisible: true;
-}
-
-$Common.@SecondaryTextButton #HeadBandageButton {
-    Text: "Bandage";
-    Anchor: (Left: 727.2461, Top: 271.91663, Width: 135, Height: 36);
-}
-
-$Common.@SecondaryTextButton #TorsoBandageButton {
-    Text: "Bandage";
-    Anchor: (Left: 1060, Top: 328.41663, Width: 135, Height: 36);
-}
-
-$Common.@SecondaryTextButton #RightArmBandageButton {
-    Text: "Bandage";
-    Anchor: (Left: 633.06793, Top: 492.61905, Width: 135, Height: 36);
-}
-
-$Common.@SecondaryTextButton #LeftArmBandageButton {
-    Text: "Bandage";
-    Anchor: (Left: 1124.375, Top: 492.61905, Width: 135, Height: 36);
-}
-
-$Common.@SecondaryTextButton #RightLegBandageButton {
-    Text: "Bandage";
-    Anchor: (Left: 652.49994, Top: 786, Width: 135, Height: 36);
-}
-
-$Common.@SecondaryTextButton #LeftLegBandageButton {
-    Text: "Bandage";
-    Anchor: (Left: 1070.5426, Top: 786, Width: 135, Height: 36);
 }

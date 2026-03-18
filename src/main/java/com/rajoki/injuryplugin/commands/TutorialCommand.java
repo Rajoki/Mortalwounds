@@ -1,4 +1,3 @@
-
 package com.rajoki.injuryplugin.commands;
 
 import com.hypixel.hytale.component.Ref;
@@ -11,19 +10,15 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.rajoki.injuryplugin.MortalWoundsPlugin;
-import com.rajoki.injuryplugin.ui.gui.BodyPartStatsUI;
-import com.rajoki.injuryplugin.components.BodyPartComponent;
+import com.rajoki.injuryplugin.ui.BodyPartTutorialUI;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.CompletableFuture;
 
-public class BodyPartStatsCommand extends AbstractPlayerCommand {
+public class TutorialCommand extends AbstractPlayerCommand {
 
-    // type /mwstats to display Body part health in text
-
-    public BodyPartStatsCommand() {
-        super("mwstats", "View your body part health");
+    public TutorialCommand() {
+        super("mwtutorial", "View the MortalWounds tutorial");
         this.setPermissionGroup(GameMode.Adventure);
     }
 
@@ -33,17 +28,9 @@ public class BodyPartStatsCommand extends AbstractPlayerCommand {
                            @Nonnull World world) {
         Player player = commandContext.senderAs(Player.class);
 
-        BodyPartComponent bodyPartComp = store.getComponent(ref,
-                MortalWoundsPlugin.getInstance().getBodyPartComponentType());
-
-        if (bodyPartComp == null || !bodyPartComp.isInitialized()) {
-            commandContext.sendMessage(Message.raw("Body part system not initialized!"));
-            return;
-        }
-
         CompletableFuture.runAsync(() -> {
-            player.getPageManager().openCustomPage(ref, store, new BodyPartStatsUI(playerRef));
-            playerRef.sendMessage(Message.raw("Body Part Stats Shown").color("green"));
+            player.getPageManager().openCustomPage(ref, store, new BodyPartTutorialUI(playerRef));
+            playerRef.sendMessage(Message.raw("Tutorial opened! Use Next/Back to navigate."));
         }, world);
     }
 }

@@ -3,7 +3,7 @@ $C = "../Common.ui";
 @Background = PatchStyle(TexturePath: "MyBackground.png");
 
 Group #BodyPartRoot {
-    Anchor: (Top: 43.795242, Right: 19.259912, Width: 200, Height: 378);
+    Anchor: (Top: 37.12858, Right: 45.926567, Width: 200, Height: 378);
     Visible: true;
 
     Label #TitleLabel {
@@ -220,5 +220,11 @@ Group #BodyPartRoot {
             TooltipText: "Leg fracture // Movement speed reduced // Heal with a splint!";
             HitTestVisible: true;
         }
+    }
+    // ===== FOOTER TEXT =====
+    Label #FooterText {
+        Anchor: (Left: 50, Top: 232, Width: 100, Height: 20);
+        Text: "/mwstats";
+        Style: (TextColor: #FFFFFF, FontSize: 10, HorizontalAlignment: Center);
     }
 }

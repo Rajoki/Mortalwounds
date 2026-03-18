@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Defines creature types and their effect immunities/resistances
+ * Defines creature types and their effect immunities/resistances. Some below are examples or for future use
  */
 public enum CreatureType {
     // Undead - can't bleed, harder to fracture
     SKELETON(
             new HashSet<>(Arrays.asList("BLEED", "HEAVY_BLEED")),  // Immune to bleeding
             new HashSet<>(),               // Resistant to fractures
-            1.0f  // Fracture threshold multiplier (2x harder to fracture)
+            1.0f  // Fracture threshold multiplier (x harder to fracture)
     ),
 
     ZOMBIE(
@@ -60,7 +60,7 @@ public enum CreatureType {
             1.5f  // Harder to make them bleed
     ),
 
-    // Plants - can't bleed blood, but can be "damaged"
+    // Plants = can't bleed blood, but can be "damaged"
     PLANT(
             new HashSet<>(Arrays.asList("BLEED", "HEAVY_BLEED")),  // No blood
             new HashSet<>(),

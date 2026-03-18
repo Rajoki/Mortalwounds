@@ -7,8 +7,8 @@ public class MortalWoundsConfig {
 
     // Fracture and Bleed chances
     public int bodyPartFractureChance = 10; // Base fracture chance on players
-    public int bodyPartBleedChance = 15; // Base bleed chance on players
-    public int heavyBleedChance = 5; // Base heavy bleed chance on players
+    public int bodyPartBleedChance = 10; // Base bleed chance on players
+    public int heavyBleedChance = 10; // Base heavy bleed chance on players
 
     // Weapon/Creature modifiers
     public int slashmodifier = 15; // Slashing modifier on players, slashing weapons/types increase bleed chance and decrease fracture chance
@@ -44,14 +44,16 @@ public class MortalWoundsConfig {
     public boolean treatMultipleWounds = true; //Keep treatment windows open to cure multiple wounds at once
 
     // === NPC-SPECIFIC INJURY THRESHOLDS ===
-    public int npcBodyPartFractureChance = 10;  // % base chance for NPCs
-    public int npcBodyPartBleedChance = 10;     // % base chance for NPCs
-    public int npcHeavyBleedChance = 8;         // % base chance for NPCs
+    public int npcBodyPartFractureChance = 15;  // % base chance for NPCs
+    public int npcBodyPartBleedChance = 15;     // % base chance for NPCs
+    public int npcHeavyBleedChance = 10;         // % base chance for NPCs
 
     // === HEAVY DAMAGE MODIFIERS (Both Players and NPCs) ===
     public float heavyDamageThreshold = 0.50f;  // How much % of a limbs max health must be dealt for a heavy hit, which increases injuries
     public int heavyDamageFractureBonus = 25;   // + fracture chance on heavy hit
     public int heavyDamageBleedBonus = 25;      // + bleed chance on heavy hit
+
+    public float headshotDamageBonus = 1.2f; //How much damage is multiplied by for headshots.
 
     // === NPC LOOT TABLES ===
     public Map<String, Map<String, List<LootEntry>>> npcLootTables = new HashMap<>();
@@ -111,20 +113,84 @@ public class MortalWoundsConfig {
         wolfLoot.put("ANY", Arrays.asList(
                 new LootEntry("Ingredient_Hide_Medium", 1, 1, 0.25f)
         ));
-        wolfLoot.put("HEAD", Arrays.asList(
+        wolfLoot.put("TORSO", Arrays.asList(
                 new LootEntry("Ingredient_Hide_Medium", 1, 1, 0.25f)
         ));
         npcLootTables.put("wolf", wolfLoot);
 
-        // GOLEM
-        Map<String, List<LootEntry>> golemLoot = new HashMap<>();
-        golemLoot.put("ANY", Arrays.asList(
-                new LootEntry("Rock_Stone_Cobble", 1, 1, 0.25f)
+        // GOLEMS
+//        Map<String, List<LootEntry>> golemLoot = new HashMap<>();
+//        golemLoot.put("ANY", Arrays.asList(
+//                new LootEntry("Rock_Stone_Cobble", 1, 1, 0.25f)
+//        ));
+//        golemLoot.put("CORE", Arrays.asList(
+//                new LootEntry("Ingredient_Bar_Iron", 1, 1, 0.50f)
+//        ));
+//        npcLootTables.put("golem", golemLoot);
+
+        // THUNDER GOLEM
+        Map<String, List<LootEntry>> golemThunderLoot = new HashMap<>();
+        golemThunderLoot.put("ANY", Arrays.asList(
+                new LootEntry("Ingredient_Crystal_Yellow", 1, 1, 0.25f)
         ));
-        golemLoot.put("CORE", Arrays.asList(
+        golemThunderLoot.put("CORE", Arrays.asList(
+                new LootEntry("Rock_Gem_Topaz", 1, 1, 0.50f)
+        ));
+        npcLootTables.put("Golem_Crystal_Thunder", golemThunderLoot);
+
+        // SANDSWEPT GOLEM
+        Map<String, List<LootEntry>> golemSandLoot = new HashMap<>();
+        golemSandLoot.put("ANY", Arrays.asList(
+                new LootEntry("Ingredient_Crystal_Cyan", 1, 1, 0.25f)
+        ));
+        golemSandLoot.put("CORE", Arrays.asList(
+                new LootEntry("Rock_Gem_Zephyr", 1, 1, 0.50f)
+        ));
+        npcLootTables.put("Golem_Crystal_Sand", golemSandLoot);
+
+        // EMBER GOLEM
+        Map<String, List<LootEntry>> golemFlameLoot = new HashMap<>();
+        golemFlameLoot.put("ANY", Arrays.asList(
+                new LootEntry("Ingredient_Fabric_Scrap_Cindercloth", 1, 1, 0.25f)
+        ));
+        golemFlameLoot.put("CORE", Arrays.asList(
+                new LootEntry("Rock_Gem_Ruby", 1, 1, 0.50f)
+        ));
+        npcLootTables.put("Golem_Crystal_Flame", golemFlameLoot);
+
+        // FROST GOLEM
+        Map<String, List<LootEntry>> golemFrostLoot = new HashMap<>();
+        golemFrostLoot.put("ANY", Arrays.asList(
+                new LootEntry("Ingredient_Crystal_Blue", 1, 1, 0.25f)
+        ));
+        golemFrostLoot.put("CORE", Arrays.asList(
+                new LootEntry("Rock_Gem_Sapphire", 1, 1, 0.50f)
+        ));
+        npcLootTables.put("Golem_Crystal_Frost", golemFrostLoot);
+
+        // FIRESTEEL GOLEM
+        Map<String, List<LootEntry>> golemFiresteelLoot = new HashMap<>();
+        golemFiresteelLoot.put("ANY", Arrays.asList(
+                new LootEntry("Ingredient_Fire_Essence", 1, 1, 0.25f)
+        ));
+        golemFiresteelLoot.put("CORE", Arrays.asList(
                 new LootEntry("Ingredient_Bar_Iron", 1, 1, 0.50f)
         ));
-        npcLootTables.put("golem", golemLoot);
+        npcLootTables.put("Golem_Firesteel", golemFiresteelLoot);
+
+        // EARTHEN GOLEM
+        Map<String, List<LootEntry>> golemEarthenLoot = new HashMap<>();
+        golemEarthenLoot.put("ANY", Arrays.asList(
+                new LootEntry("Ingredient_Crystal_Green", 1, 1, 0.25f)
+        ));
+        golemEarthenLoot.put("CORE", Arrays.asList(
+                new LootEntry("Rock_Gem_Emerald", 1, 1, 0.50f)
+        ));
+        npcLootTables.put("Golem_Crystal_Earth", golemEarthenLoot);
+
+
+
+
 
         // SPIDER
         Map<String, List<LootEntry>> spiderLoot = new HashMap<>();

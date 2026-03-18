@@ -81,7 +81,7 @@ public class FractureDurationSystem extends DelayedEntitySystem<EntityStore> {
                         playerFractures.remove(part);
 
 //                        playerRef.sendMessage(Message.raw(
-//                                String.format("§a%s fracture healed!", part.getDisplayName())
+//                                String.format("%s fracture healed!", part.getDisplayName())
 //                        ));
 
 //                        LOGGER.atInfo().log(String.format("[FRACTURE HEALED] %s auto-healed after %.1f seconds",

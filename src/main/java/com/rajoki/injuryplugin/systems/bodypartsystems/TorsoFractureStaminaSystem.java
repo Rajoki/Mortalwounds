@@ -4,34 +4,29 @@ import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.DelayedEntitySystem;
 import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.server.core.asset.type.entityeffect.config.EntityEffect;
-import com.hypixel.hytale.server.core.entity.effect.EffectControllerComponent;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatValue;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.protocol.GameMode;
 import com.rajoki.injuryplugin.components.BodyPartComponent;
 
 import javax.annotation.Nonnull;
 
-/**
- * Clamps stamina to 50% when torso is fractured.
- *
- * Also clears the Stamina_Broken (guard break) effect when stamina reaches
- * the clamped ceiling. Without this, guard break can never clear because its
- * recovery condition requires full stamina, which the clamp prevents. (Seems to have bugs
- * as sometimes guard break wasn't clearing and would have to wait till fracture was healed and
- * stamina went back to 100%. Removed it for now from plugin setup and may return later.
- */
+
+//Torso fractured = stamina drains at x speed when using abilities
+// This gives you effectively 50% stamina without breaking the guard break system
+// There was a bug with clamping stamina with guard break and multi-hit attacks
 public class TorsoFractureStaminaSystem extends DelayedEntitySystem<EntityStore> {
     private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
     private final ComponentType<EntityStore, BodyPartComponent> bodyPartComponentType;
 
-    private static final String GUARD_BREAK_EFFECT = "Stamina_Broken";
+    private static final float DRAIN_MULTIPLIER = 1.5f; // x stamina drain when fractured
 
     public TorsoFractureStaminaSystem(ComponentType<EntityStore, BodyPartComponent> bodyPartComponentType) {
-        super(0.1f); // Check every 0.1 seconds
+        super(0.05f); // Tick 20 times per second for smooth drain
         this.bodyPartComponentType = bodyPartComponentType;
     }
 
@@ -47,10 +42,17 @@ public class TorsoFractureStaminaSystem extends DelayedEntitySystem<EntityStore>
         try {
             Ref<EntityStore> ref = chunk.getReferenceTo(index);
             PlayerRef playerRef = chunk.getComponent(index, PlayerRef.getComponentType());
+            Player player = chunk.getComponent(index, Player.getComponentType());
             EntityStatMap stats = chunk.getComponent(index, EntityStatMap.getComponentType());
             BodyPartComponent bodyPartComp = chunk.getComponent(index, this.bodyPartComponentType);
 
-            if (playerRef == null || stats == null || bodyPartComp == null) {
+            if (playerRef == null || player == null || stats == null || bodyPartComp == null) {
+                return;
+            }
+
+            // Skip in Creative mode
+            GameMode gameMode = player.getGameMode();
+            if (gameMode == GameMode.Creative) {
                 return;
             }
 
@@ -62,67 +64,45 @@ public class TorsoFractureStaminaSystem extends DelayedEntitySystem<EntityStore>
             }
 
             boolean hasTorsoFracture = bodyPartComp.hasBodyPartEffect(BodyPart.TORSO, "FRACTURE");
-            boolean isTorsoBroken = bodyPartComp.isBodyPartBroken(BodyPart.TORSO);
-            float originalMaxStamina = staminaValue.getMax();
             float currentStamina = staminaValue.get();
+            float maxStamina = staminaValue.getMax();
 
-            if (hasTorsoFracture || isTorsoBroken) {
-                float clampedMax = originalMaxStamina * 0.5f;
+            if (hasTorsoFracture) {
+                // Check if stamina is actively draining (being used)
+                // If stamina is below max and not at zero, it's either draining or regenerating
+                // We detect usage by checking if it decreased since last tick
 
-                // Only clear guard break when stamina is POSITIVE and recovering
-                // If stamina is negative, the guard break is legitimate (you're actually broken)
-                // Once stamina regenerates back to positive, then we clear it
-                if (currentStamina > 1) {
+                // Store previous stamina value in component
+                Float previousStamina = bodyPartComp.getCustomFloat("PREV_STAMINA");
 
+                if (previousStamina != null && previousStamina > currentStamina && currentStamina > 0) {
+                    // Stamina decreased = player is using it
+                    // Apply additional drain (multiply the drain)
+                    float drainAmount = previousStamina - currentStamina;
+                    float extraDrain = drainAmount * (DRAIN_MULTIPLIER - 1.0f); // Additional drain
 
-                    clearGuardBreakEffect(ref, store);
-
-//                    {
-//                        LOGGER.atInfo().log("[TORSO FRACTURE] Cleared guard break effect. " +
-//                                "Stamina: " + currentStamina + "/" + clampedMax +
-//                                " (Torso broken: " + isTorsoBroken + ")");
-//                    }
+                    float newStamina = Math.max(0, currentStamina - extraDrain);
+                    stats.setStatValue(staminaIdx, newStamina);
                 }
 
-                // Clamp stamina if it's above the limit
-                if (currentStamina > clampedMax) {
-                    stats.setStatValue(staminaIdx, clampedMax);
-                }
+                // Store current stamina for next tick
+                bodyPartComp.setCustomFloat("PREV_STAMINA", currentStamina);
 
-                if (!bodyPartComp.hasBodyPartEffect(BodyPart.TORSO, "STAMINA_CLAMPED")) {
-                    bodyPartComp.addBodyPartEffect(BodyPart.TORSO, "STAMINA_CLAMPED");
+                // Mark that torso is fractured
+                if (!bodyPartComp.hasBodyPartEffect(BodyPart.TORSO, "STAMINA_PENALTY")) {
+                    bodyPartComp.addBodyPartEffect(BodyPart.TORSO, "STAMINA_PENALTY");
                 }
 
             } else {
-                // No torso fracture/broken, remove clamp marker if it exists
-                if (bodyPartComp.hasBodyPartEffect(BodyPart.TORSO, "STAMINA_CLAMPED")) {
-                    bodyPartComp.removeBodyPartEffect(BodyPart.TORSO, "STAMINA_CLAMPED");
+                // No torso fracture = clean up
+                if (bodyPartComp.hasBodyPartEffect(BodyPart.TORSO, "STAMINA_PENALTY")) {
+                    bodyPartComp.removeBodyPartEffect(BodyPart.TORSO, "STAMINA_PENALTY");
                 }
+                bodyPartComp.removeCustomFloat("PREV_STAMINA");
             }
 
         } catch (Exception e) {
             LOGGER.atWarning().log("Error in TorsoFractureStaminaSystem: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Removes the Stamina_Broken (guard break) effect if it is currently active.
-     * Uses the same EffectControllerComponent pattern as HeadFractureEffectSystem.
-     */
-    private void clearGuardBreakEffect(Ref<EntityStore> ref, Store<EntityStore> store) {
-        try {
-            EffectControllerComponent effectController = store.getComponent(
-                    ref, EffectControllerComponent.getComponentType());
-            if (effectController == null) return;
-
-            int effectIndex = EntityEffect.getAssetMap().getIndex(GUARD_BREAK_EFFECT);
-            if (effectIndex == Integer.MIN_VALUE) return;
-
-            if (effectController.getActiveEffects().containsKey(effectIndex)) {
-                effectController.removeEffect(ref, effectIndex, store);
-            }
-        } catch (Exception e) {
-            LOGGER.atWarning().log("Error clearing guard break effect: " + e.getMessage());
         }
     }
 }

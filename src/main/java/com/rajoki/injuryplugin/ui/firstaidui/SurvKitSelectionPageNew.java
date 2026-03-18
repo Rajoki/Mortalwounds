@@ -156,7 +156,7 @@ public class SurvKitSelectionPageNew extends InteractiveCustomUIPage<SurvKitSele
 
                     // Consume survival kit
                     if (!consumeSurvivalKit(player)) {
-                        playerRef.sendMessage(Message.raw("§cYou need a Survival Kit!"));
+                        playerRef.sendMessage(Message.raw("You need a Survival Kit!"));
                         return;
                     }
 

@@ -116,7 +116,7 @@ public class BodyPartRecoverySystem extends DelayedEntitySystem<EntityStore> {
                     float newHealth = Math.min(newMax, newMax * damageRatio);
                     bodyPartComp.setBodyPartHealth(part, newHealth);
                 } else {
-                    // Max health increased - just clamp to new max (don't scale up)
+                    // Max health increased = just clamp to new max (don't scale up)
                     float newHealth = Math.min(newMax, currentHealth);
                     bodyPartComp.setBodyPartHealth(part, newHealth);
                 }

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.rajoki.injuryplugin"
-version = "1.4.0"
+version = "1.6.0"
 val javaVersion = 25
 
 val appData = System.getenv("APPDATA") ?: (System.getenv("HOME") + "/.var/app/com.hypixel.HytaleLauncher/data")

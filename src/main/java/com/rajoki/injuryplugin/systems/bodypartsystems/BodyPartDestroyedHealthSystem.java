@@ -97,7 +97,7 @@ public class BodyPartDestroyedHealthSystem extends DelayedEntitySystem<EntitySto
             stats.setStatValue(healthIdx, effectiveMaxHealth);
 
             //  Notify player they hit the limit
-            // playerRef.sendMessage(Message.raw("§cYour destroyed limbs limit your max health!"));
+            // playerRef.sendMessage(Message.raw("Your destroyed limbs limit your max health!"));
         }
     }
 }

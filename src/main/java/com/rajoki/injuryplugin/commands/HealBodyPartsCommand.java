@@ -10,6 +10,8 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.asset.type.entityeffect.config.EntityEffect;
+import com.hypixel.hytale.server.core.entity.effect.EffectControllerComponent;
 import com.rajoki.injuryplugin.MortalWoundsPlugin;
 import com.rajoki.injuryplugin.components.BodyPartComponent;
 import com.rajoki.injuryplugin.systems.bodypartsystems.BodyPart;
@@ -36,7 +38,7 @@ public class HealBodyPartsCommand extends AbstractPlayerCommand {
                 MortalWoundsPlugin.getInstance().getBodyPartComponentType());
 
         if (bodyPartComp == null || !bodyPartComp.isInitialized()) {
-            commandContext.sendMessage(Message.raw("§cBody part system not initialized!"));
+            commandContext.sendMessage(Message.raw("Body part system not initialized!"));
             return;
         }
 
@@ -69,6 +71,11 @@ public class HealBodyPartsCommand extends AbstractPlayerCommand {
                 bodyPartComp.removeBodyPartEffect(part, "DESTROYED");
             }
 
+            // IMPORTANT: Remove STAMINA_CLAMPED marker (added by TorsoFractureStaminaSystem)
+            if (bodyPartComp.hasBodyPartEffect(part, "STAMINA_CLAMPED")) {
+                bodyPartComp.removeBodyPartEffect(part, "STAMINA_CLAMPED");
+            }
+
             // Restore broken limbs
             if (bodyPartComp.isBodyPartBroken(part)) {
                 bodyPartComp.setBodyPartBroken(part, false);
@@ -77,11 +84,35 @@ public class HealBodyPartsCommand extends AbstractPlayerCommand {
             }
         }
 
-        String message = String.format("§aRemoved %d fractures, %d bleeds, %d heavy bleeds, and restored %d broken limbs!",
+        // CRITICAL: Also clear the guard break effect from the player
+        clearGuardBreakEffect(ref, store);
+
+        String message = String.format("Removed %d fractures, %d bleeds, %d heavy bleeds, and restored %d broken limbs!",
                 fracturesRemoved, bleedsRemoved, heavyBleedsRemoved, brokenPartsRestored);
         commandContext.sendMessage(Message.raw(message));
 
         // Mark component as dirty so systems update
         bodyPartComp.markDirty();
+    }
+
+    /**
+     * Removes the Stamina_Broken (guard break) effect if active.
+     * Important for clean healing during testing.
+     */
+    private void clearGuardBreakEffect(Ref<EntityStore> ref, Store<EntityStore> store) {
+        try {
+            EffectControllerComponent effectController = store.getComponent(
+                    ref, EffectControllerComponent.getComponentType());
+            if (effectController == null) return;
+
+            int effectIndex = EntityEffect.getAssetMap().getIndex("Stamina_Broken");
+            if (effectIndex == Integer.MIN_VALUE) return;
+
+            if (effectController.getActiveEffects().containsKey(effectIndex)) {
+                effectController.removeEffect(ref, effectIndex, store);
+            }
+        } catch (Exception e) {
+            // Silently fail - not critical
+        }
     }
 }

@@ -161,7 +161,7 @@ public class SplintSelectionPageNew extends InteractiveCustomUIPage<SplintSelect
                 if (bodyPartComp != null && bodyPartComp.hasBodyPartEffect(part, "FRACTURE")) {
 
                     if (!consumeSplint(player)) {
-                        playerRef.sendMessage(Message.raw("§cYou need a splint!"));
+                        playerRef.sendMessage(Message.raw("You need a splint!"));
                         return;
                     }
 

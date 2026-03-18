@@ -19,6 +19,7 @@ import com.rajoki.injuryplugin.components.npc.NPCBodyPartComponent;
 import com.rajoki.injuryplugin.config.MortalWoundsConfig;
 import com.rajoki.injuryplugin.systems.BodyPartMultiplierSystem;
 import com.rajoki.injuryplugin.systems.PlayerJoinHitTrackerSystem;
+import com.rajoki.injuryplugin.systems.PlayerJoinWelcomeSystem;
 import com.rajoki.injuryplugin.systems.bodypartsystems.*;
 import com.rajoki.injuryplugin.systems.npc.*;
 import com.rajoki.injuryplugin.ui.firstaidui.*;
@@ -76,6 +77,7 @@ public class MortalWoundsPlugin extends JavaPlugin {
         this.getCommandRegistry().registerCommand(new BodyPartStatsCommand());
         this.getCommandRegistry().registerCommand(new BodyPartStatusCommand());
         this.getCommandRegistry().registerCommand(new HealBodyPartsCommand());
+        this.getCommandRegistry().registerCommand(new TutorialCommand());
 
 
 
@@ -99,6 +101,7 @@ public class MortalWoundsPlugin extends JavaPlugin {
 
         // Register HitTracker systems
         this.getEntityStoreRegistry().registerSystem(new PlayerJoinHitTrackerSystem(hitTrackerComponentType));
+        this.getEntityStoreRegistry().registerSystem(new PlayerJoinWelcomeSystem());
         // this.getEntityStoreRegistry().registerSystem(new InjuryRollSystem(hitTrackerComponentType));
 
         // Register BodyPart systems (using the SAME bodyPartComponentType)
@@ -108,8 +111,8 @@ public class MortalWoundsPlugin extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new LegFractureMovementSystem(bodyPartComponentType));
         this.getEntityStoreRegistry().registerSystem(new BodyPartHudTickSystem(bodyPartComponentType));
         this.getEntityStoreRegistry().registerSystem(new BodyPartBleedSystem(bodyPartComponentType));
-        //Disabled TorsoFracture for now because of bug
-        // this.getEntityStoreRegistry().registerSystem(new TorsoFractureStaminaSystem(bodyPartComponentType));
+
+        this.getEntityStoreRegistry().registerSystem(new TorsoFractureStaminaSystem(bodyPartComponentType));
         this.getEntityStoreRegistry().registerSystem(new HeadFractureEffectSystem(bodyPartComponentType));
         this.getEntityStoreRegistry().registerSystem(new OnDeathInjuryResetSystem());
         this.getEntityStoreRegistry().registerSystem(new FractureDurationSystem(bodyPartComponentType));
@@ -121,6 +124,8 @@ public class MortalWoundsPlugin extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new NPCLegFractureMovementSystem(npcBodyPartType));
         this.getEntityStoreRegistry().registerSystem(new NPCArmFractureDamageSystem(npcBodyPartType));
         this.getEntityStoreRegistry().registerSystem(new NPCBodyPartBleedSystem(npcBodyPartType));
+        this.getEntityStoreRegistry().registerSystem(new NPCTorsoFractureDamageSystem(npcBodyPartType));
+        this.getEntityStoreRegistry().registerSystem(new NPCHeadFractureMissSystem(npcBodyPartType));
 
         this.getEntityStoreRegistry().registerSystem(new BodyPartMultiplierSystem(bodyPartComponentType, npcBodyPartType));
 
